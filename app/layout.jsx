@@ -9,7 +9,7 @@ export default function RootLayout({ children }) {
       <body className="p-6">
         <header className="mb-6">
           <Image
-  src="/logo.jpg"
+  src="/logo.png"
   alt="Gift Me Right logo"
   width={160}
   height={60}
