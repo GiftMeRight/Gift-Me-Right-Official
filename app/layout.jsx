@@ -1,3 +1,4 @@
+import Image from "next/image"
 
 import './globals.css'
 
@@ -7,11 +8,14 @@ export default function RootLayout({ children }) {
 
       <body className="p-6">
         <header className="mb-6">
-          <img
+          <Image
   src="/logo.jpg"
   alt="Gift Me Right logo"
-  className="h-10"
- />
+  width={160}
+  height={60}
+  priority
+/>
+
 
         </header>
         {children}
