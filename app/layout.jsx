@@ -10,7 +10,12 @@ export default function RootLayout({ children }) {
 
       <body className="p-6">
         <header className="mb-6">
-          <h1 className="text-2xl font-bold">Gift Me Right</h1>
+          <img
+  src="/logo.jpg"
+  alt="Gift Me Right logo"
+  className="h-10"
+/>
+
         </header>
         {children}
       </body>
