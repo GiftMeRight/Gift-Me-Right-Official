@@ -1,0 +1,1 @@
+export default () => <div className='border p-4 mt-4'>Component ready</div>
