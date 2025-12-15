@@ -15,9 +15,12 @@ export default function HomePage() {
         </p>
 
         <div className="pt-6">
-          <button className="bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-pink-700 transition">
-            Create Your Journal
-          </button>
+<a
+  href="/create"
+  className="inline-block bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-pink-700 transition"
+>
+  Create Your Journal
+</a>
         </div>
       </section>
 
@@ -124,9 +127,13 @@ export default function HomePage() {
           Let’s help the people who love you… love you the right way.
         </p>
 
-        <button className="bg-pink-600 text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-pink-700 transition">
-          Get Started
-        </button>
+<a
+  href="/create"
+  className="inline-block bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-pink-700 transition"
+>
+  Get Started
+</a>
+
       </section>
 
     </main>
