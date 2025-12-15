@@ -11,8 +11,8 @@ export default function RootLayout({ children }) {
           <Image
   src="/logo.png"
   alt="Gift Me Right logo"
-  width={160}
-  height={60}
+  width={140}
+  height={140}
   priority
 />
 
