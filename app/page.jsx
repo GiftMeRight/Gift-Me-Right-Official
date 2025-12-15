@@ -117,6 +117,37 @@ export default function HomePage() {
           </p>
         </div>
       </section>
+<section className="bg-gray-50 rounded-3xl p-10 space-y-8">
+  <h2 className="text-3xl font-semibold text-center">
+    What people are saying
+  </h2>
+
+  <div className="grid md:grid-cols-3 gap-6">
+    <div className="bg-white rounded-2xl p-6 shadow-sm">
+      <p className="text-gray-700">
+        “This completely changed how my partner shows love.
+        I’ve never felt more understood.”
+      </p>
+      <p className="mt-4 font-semibold">— Emily</p>
+    </div>
+
+    <div className="bg-white rounded-2xl p-6 shadow-sm">
+      <p className="text-gray-700">
+        “Birthdays are no longer awkward.
+        Everyone finally gets me.”
+      </p>
+      <p className="mt-4 font-semibold">— Sarah</p>
+    </div>
+
+    <div className="bg-white rounded-2xl p-6 shadow-sm">
+      <p className="text-gray-700">
+        “I made one for myself and one for my best friend.
+        It’s thoughtful, fun, and emotional.”
+      </p>
+      <p className="mt-4 font-semibold">— Alex</p>
+    </div>
+  </div>
+</section>
 
       {/* FINAL CTA */}
       <section className="text-center space-y-6">
