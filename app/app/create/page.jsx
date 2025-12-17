@@ -15,6 +15,22 @@ export default function CreatePage() {
       <section className="bg-pink-50 rounded-3xl p-8 space-y-6">
         <h2 className="text-2xl font-semibold">
           What you’ll create
+          <section className="space-y-6">
+  <h2 className="text-2xl font-semibold">
+    Guided journal questions
+  </h2>
+
+  <ul className="space-y-4 text-gray-700 text-lg">
+    <li><strong>Favorites:</strong> Foods, drinks, places, and activities you love</li>
+    <li><strong>Gifting style:</strong> Practical, sentimental, experiences, or surprises?</li>
+    <li><strong>Love language:</strong> How you feel most appreciated</li>
+    <li><strong>Comfort:</strong> What helps you feel better on hard days</li>
+    <li><strong>Surprises:</strong> What delights you — and what you don’t enjoy</li>
+    <li><strong>Pet peeves:</strong> The little things people should know</li>
+    <li><strong>Rituals:</strong> Routines or traditions that matter to you</li>
+  </ul>
+</section>
+
         </h2>
         <ul className="space-y-3 text-gray-700 text-lg">
           <li>• Your likes, dislikes, and dream gifts</li>
