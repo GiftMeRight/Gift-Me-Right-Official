@@ -5,6 +5,9 @@ import './globals.css'
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+  <head>
+    <link rel="icon" href="/favicon.png" />
+  </head>
 
       <body className="p-6">
         <header className="mb-6">
