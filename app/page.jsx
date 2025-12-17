@@ -1,6 +1,6 @@
 export default function HomePage() {
   return (
-    <main className="max-w-5xl mx-auto px-6 py-12 space-y-24">
+    <main className="bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 hover:bg-pink-700"
 
       {/* HERO */}
       <section className="text-center space-y-6">
