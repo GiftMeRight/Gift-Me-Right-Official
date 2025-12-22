@@ -2,15 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Body styling */
+/* Full-page soft gradient background */
 body {
-  background-color: #fffafc;
+  background: linear-gradient(135deg, #fff0f5, #ffe4e1, #fffaf0);
+  background-size: 400% 400%;
+  animation: pulseGlow 20s ease infinite;
   line-height: 1.7;
-  transition: background-color 0.5s ease;
-}
-
-.dark body {
-  background-color: #111; /* Luxury dark background */
 }
 
 /* Section scroll offset */
@@ -18,7 +15,7 @@ section {
   scroll-margin-top: 80px;
 }
 
-/* Soft pulsing background */
+/* Soft pulse animation for glow */
 @keyframes softPulse {
   0% { background-color: #fffafc; }
   50% { background-color: #fdecef; }
@@ -28,7 +25,7 @@ section {
   animation: softPulse 8s ease-in-out infinite;
 }
 
-/* Fade-in animation */
+/* Fade-in for sections */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -44,52 +41,30 @@ section {
   100% { background-position: 0% 50%; }
 }
 .bg-glow {
-  background: linear-gradient(
-    135deg,
-    rgba(255,192,203,0.3),
-    rgba(255,182,193,0.3),
-    rgba(255,105,180,0.3)
-  );
+  background: linear-gradient(135deg, rgba(255,192,203,0.3), rgba(255,182,193,0.3), rgba(255,105,180,0.3));
   background-size: 400% 400%;
   animation: pulseGlow 15s ease infinite;
+  border-radius: 1rem;
 }
 
-/* Floating shimmer particles with subtle color cycle */
+/* Floating particles / hearts */
 @keyframes floatParticle {
-  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.4; background-color: #ffc0cb; }
-  25% { background-color: #ffb6c1; }
-  50% { transform: translateY(-20px) translateX(10px) scale(1.1); opacity: 0.7; background-color: #ff69b4; }
-  75% { background-color: #ffb6c1; }
-  100% { transform: translateY(0) translateX(-10px) scale(1); opacity: 0.4; background-color: #ffc0cb; }
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.5; }
+  25% { opacity: 0.7; }
+  50% { transform: translateY(-20px) translateX(10px) scale(1.2); opacity: 0.8; }
+  75% { opacity: 0.7; }
+  100% { transform: translateY(0) translateX(-10px) scale(1); opacity: 0.5; }
 }
-
 .particle {
   position: absolute;
-  width: 3px;
-  height: 3px;
   border-radius: 50%;
+  background-color: #ffc0cb;
   animation: floatParticle linear infinite;
 }
 
-/* Optional fade-up animation for other elements */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-/* Floating hearts animation */
-@keyframes floatHeart {
-  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.4; }
-  25% { transform: translateY(-15px) translateX(5px) rotate(10deg); opacity: 0.6; }
-  50% { transform: translateY(-30px) translateX(-5px) rotate(-10deg); opacity: 0.8; }
-  75% { transform: translateY(-15px) translateX(5px) rotate(10deg); opacity: 0.6; }
-  100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.4; }
-}
-
+/* Floating hearts */
 .floating-heart {
   position: absolute;
-  font-size: 1rem; /* Adjust size */
-  color: #ff6eb4;
-  opacity: 0.4;
-  animation: floatHeart linear infinite;
-  pointer-events: none; /* So they don’t block clicks */
+  opacity: 0.7;
+  animation: floatParticle linear infinite;
 }
