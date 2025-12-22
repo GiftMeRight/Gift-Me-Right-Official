@@ -76,3 +76,20 @@ section {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
+/* Floating hearts animation */
+@keyframes floatHeart {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.4; }
+  25% { transform: translateY(-15px) translateX(5px) rotate(10deg); opacity: 0.6; }
+  50% { transform: translateY(-30px) translateX(-5px) rotate(-10deg); opacity: 0.8; }
+  75% { transform: translateY(-15px) translateX(5px) rotate(10deg); opacity: 0.6; }
+  100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.4; }
+}
+
+.floating-heart {
+  position: absolute;
+  font-size: 1rem; /* Adjust size */
+  color: #ff6eb4;
+  opacity: 0.4;
+  animation: floatHeart linear infinite;
+  pointer-events: none; /* So they don’t block clicks */
+}
