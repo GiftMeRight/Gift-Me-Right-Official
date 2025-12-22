@@ -47,7 +47,7 @@ export default function HomePage() {
   }, [isDark]);
 
   return (
-    <main className="px-6 pt-4 pb-12 space-y-24 relative">
+    <main className="px-6 pt-1 pb-12 space-y-24 relative">
       {/* Dark mode toggle */}
       <div className="fixed top-6 right-6 z-50">
         <button
