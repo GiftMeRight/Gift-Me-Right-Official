@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-function SectionGlow({ children }) {
+function SectionGlow({ children, className = "" }) {
   const particles = Array.from({ length: 10 }).map((_, i) => ({
     top: `${Math.random() * 100}%`,
     left: `${Math.random() * 100}%`,
@@ -13,7 +13,9 @@ function SectionGlow({ children }) {
   }));
 
   return (
-    <section className="animate-fadeIn relative bg-white/80 dark:bg-gray-900/80 backdrop-blur rounded-3xl p-10 shadow-sm overflow-hidden my-12">
+    <section
+      className={`animate-fadeIn relative bg-white/80 dark:bg-gray-900/80 backdrop-blur rounded-3xl p-10 shadow-sm overflow-hidden my-12 ${className}`}
+    >
       <div className="absolute inset-0 bg-gradient-to-tr from-pink-200 via-pink-100 to-white/0 dark:from-pink-900 dark:via-pink-800 dark:to-black/0 opacity-40 -z-10 rounded-3xl"></div>
       <div className="absolute inset-0 bg-glow -z-20 rounded-3xl"></div>
       {particles.map((p, idx) => (
@@ -45,7 +47,7 @@ export default function HomePage() {
   }, [isDark]);
 
   return (
-    <main className="soft-glow px-6 pt-2 pb-12 space-y-24 relative">
+    <main className="px-6 pt-4 pb-12 space-y-24 relative">
       {/* Dark mode toggle */}
       <div className="fixed top-6 right-6 z-50">
         <button
@@ -57,7 +59,7 @@ export default function HomePage() {
       </div>
 
       {/* HERO */}
-      <SectionGlow>
+      <SectionGlow className="soft-glow">
         <div className="relative flex flex-col items-center text-center">
           {/* Floating hearts behind text */}
           {Array.from({ length: 8 }).map((_, idx) => (
@@ -65,9 +67,9 @@ export default function HomePage() {
               key={idx}
               className="floating-heart"
               style={{
-                top: `${Math.random() * 50 + 10}%`,
+                top: `${Math.random() * 40 + 5}%`, // lower hearts
                 left: `${Math.random() * 80 + 10}%`,
-                fontSize: `${Math.random() * 16 + 12}px`,
+                fontSize: `${Math.random() * 12 + 10}px`, // smaller hearts
                 animationDuration: `${Math.random() * 8 + 6}s`,
                 animationDelay: `${Math.random() * 5}s`,
               }}
@@ -76,7 +78,7 @@ export default function HomePage() {
             </div>
           ))}
 
-          {/* Title and subtitle first */}
+          {/* Title and subtitle above hero image */}
           <h1 className="text-4xl md:text-5xl font-bold leading-tight text-gray-900 dark:text-gray-50">
             Welcome to <span className="text-pink-600">Gift Me Right</span>
           </h1>
