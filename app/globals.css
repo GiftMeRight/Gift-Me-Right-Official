@@ -46,3 +46,20 @@ section {
 .animate-fadeIn {
   animation: fadeIn 1s ease forwards;
 }
+@keyframes pulseGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-glow {
+  background: linear-gradient(135deg, rgba(255,192,203,0.3), rgba(255,182,193,0.3), rgba(255,105,180,0.3));
+  background-size: 400% 400%;
+  animation: pulseGlow 15s ease infinite;
+}
