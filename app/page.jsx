@@ -3,21 +3,26 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-function SectionGlow({ children, className = "" }) {
-  const particles = Array.from({ length: 10 }).map((_, i) => ({
+function SectionGlow({ children }) {
+  const particles = Array.from({ length: 6 }).map((_, i) => ({
     top: `${Math.random() * 100}%`,
     left: `${Math.random() * 100}%`,
-    size: `${Math.random() * 4 + 2}px`,
-    duration: `${Math.random() * 12 + 6}s`,
+    size: `${Math.random() * 6 + 2}px`,
+    duration: `${Math.random() * 15 + 10}s`,
+    delay: `${Math.random() * 5}s`,
+  }));
+
+  const hearts = Array.from({ length: 5 }).map((_, i) => ({
+    top: `${Math.random() * 80 + 10}%`,
+    left: `${Math.random() * 80 + 10}%`,
+    size: `${Math.random() * 16 + 12}px`,
+    duration: `${Math.random() * 12 + 8}s`,
     delay: `${Math.random() * 5}s`,
   }));
 
   return (
-    <section
-      className={`animate-fadeIn relative bg-white/80 dark:bg-gray-900/80 backdrop-blur rounded-3xl p-10 shadow-sm overflow-hidden my-12 ${className}`}
-    >
-      <div className="absolute inset-0 bg-gradient-to-tr from-pink-200 via-pink-100 to-white/0 dark:from-pink-900 dark:via-pink-800 dark:to-black/0 opacity-40 -z-10 rounded-3xl"></div>
-      <div className="absolute inset-0 bg-glow -z-20 rounded-3xl"></div>
+    <section className="animate-fadeIn relative bg-white/70 dark:bg-gray-900/70 backdrop-blur rounded-3xl p-10 shadow-sm overflow-hidden my-12">
+      <div className="absolute inset-0 bg-glow -z-20"></div>
       {particles.map((p, idx) => (
         <div
           key={idx}
@@ -31,6 +36,21 @@ function SectionGlow({ children, className = "" }) {
             animationDelay: p.delay,
           }}
         />
+      ))}
+      {hearts.map((h, idx) => (
+        <div
+          key={idx}
+          className="floating-heart -z-10"
+          style={{
+            top: h.top,
+            left: h.left,
+            fontSize: h.size,
+            animationDuration: h.duration,
+            animationDelay: h.delay,
+          }}
+        >
+          ❤️
+        </div>
       ))}
       {children}
     </section>
@@ -61,24 +81,6 @@ export default function HomePage() {
       {/* HERO */}
       <SectionGlow className="soft-glow">
         <div className="relative flex flex-col items-center text-center">
-          {/* Floating hearts behind text */}
-          {Array.from({ length: 8 }).map((_, idx) => (
-            <div
-              key={idx}
-              className="floating-heart"
-              style={{
-                top: `${Math.random() * 40 + 5}%`, // lower hearts
-                left: `${Math.random() * 80 + 10}%`,
-                fontSize: `${Math.random() * 12 + 10}px`, // smaller hearts
-                animationDuration: `${Math.random() * 8 + 6}s`,
-                animationDelay: `${Math.random() * 5}s`,
-              }}
-            >
-              ❤️
-            </div>
-          ))}
-
-          {/* Title and subtitle above hero image */}
           <h1 className="text-4xl md:text-5xl font-bold leading-tight text-gray-900 dark:text-gray-50">
             Welcome to <span className="text-pink-600">Gift Me Right</span>
           </h1>
@@ -92,7 +94,6 @@ export default function HomePage() {
             Create Your Journal
           </a>
 
-          {/* Hero image below text */}
           <div className="relative w-full max-w-3xl h-64 md:h-96 rounded-3xl overflow-hidden shadow-lg mt-6">
             <Image
               src="/images/hero-gift.jpg"
