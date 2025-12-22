@@ -24,3 +24,17 @@ section {
 .soft-glow {
   animation: softPulse 8s ease-in-out infinite;
 }
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeUp 1.2s ease forwards;
+}
