@@ -63,32 +63,53 @@ export default function HomePage() {
         </button>
       </div>
 
-      {/* HERO */}
-      <SectionGlow>
-        <div className="flex flex-col items-center text-center">
-          <div className="relative w-full max-w-3xl h-64 md:h-96 rounded-3xl overflow-hidden shadow-lg mb-6">
-            <Image
-              src="https://images.unsplash.com/photo-1518459031867-a89b944bffe0?auto=format&fit=crop&w=1200&q=80"
-              alt="Beautiful gift wrapping"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight text-gray-900 dark:text-gray-50">
-            Welcome to <span className="text-pink-600">Gift Me Right</span>
-          </h1>
-          <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mt-4">
-            The place where thoughtful gifting begins.
-          </p>
-          <a
-            href="/create"
-            className="mt-6 inline-block bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 hover:shadow-lg"
-          >
-            Create Your Journal
-          </a>
-        </div>
-      </SectionGlow>
+{/* HERO */}
+<SectionGlow>
+  <div className="relative flex flex-col items-center text-center">
+    {/* Floating hearts */}
+    {Array.from({ length: 8 }).map((_, idx) => (
+      <div
+        key={idx}
+        className="floating-heart"
+        style={{
+          top: `${Math.random() * 50 + 10}%`,
+          left: `${Math.random() * 80 + 10}%`,
+          fontSize: `${Math.random() * 16 + 12}px`,
+          animationDuration: `${Math.random() * 8 + 6}s`,
+          animationDelay: `${Math.random() * 5}s`,
+        }}
+      >
+        ❤️
+      </div>
+    ))}
+
+    {/* Hero image */}
+    <div className="relative w-full max-w-3xl h-64 md:h-96 rounded-3xl overflow-hidden shadow-lg mb-6">
+      <Image
+        src="https://images.unsplash.com/photo-1518459031867-a89b944bffe0?auto=format&fit=crop&w=1200&q=80"
+        alt="Beautiful gift wrapping"
+        fill
+        className="object-cover"
+        priority
+      />
+    </div>
+
+    {/* Hero text */}
+    <h1 className="text-4xl md:text-5xl font-bold leading-tight text-gray-900 dark:text-gray-50">
+      Welcome to <span className="text-pink-600">Gift Me Right</span>
+    </h1>
+    <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mt-4">
+      The place where thoughtful gifting begins.
+    </p>
+    <a
+      href="/create"
+      className="mt-6 inline-block bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 hover:shadow-lg"
+    >
+      Create Your Journal
+    </a>
+  </div>
+</SectionGlow>
+
 
       {/* PROBLEM */}
       <SectionGlow>
