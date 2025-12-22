@@ -3,7 +3,7 @@ export default function HomePage() {
    <main className="soft-glow min-h-screen px-6 py-12 space-y-24">
 
       {/* HERO */}
-      <section className="text-center space-y-6">
+     <section className="fade-in text-center space-y-6">
         <h1 className="text-4xl md:text-5xl font-bold leading-tight">
           Welcome to <span className="text-pink-600">Gift Me Right</span>
         </h1>
@@ -25,7 +25,7 @@ export default function HomePage() {
       </section>
 
       {/* PROBLEM */}
-      <section className="space-y-6 max-w-4xl mx-auto">
+      <section className="fade-in space-y-6 max-w-4xl mx-auto">
         <h2 className="text-3xl font-semibold text-center">
           Gift-giving shouldn’t feel like a guessing game
         </h2>
@@ -40,7 +40,7 @@ export default function HomePage() {
       </section>
 
       {/* SOLUTION */}
-      <section className="bg-pink-50 rounded-3xl p-10 space-y-8">
+      <section className="fade-in bg-pink-50 rounded-3xl p-10 space-y-8">
         <h2 className="text-3xl font-semibold text-center">
           We turn your personality into a gifting guide
         </h2>
@@ -67,7 +67,7 @@ export default function HomePage() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="space-y-10">
+      <section className="fade-in bg-pink-50 rounded-3xl p-10 space-y-8">
         <h2 className="text-3xl font-semibold text-center">
           How it works
         </h2>
@@ -150,7 +150,7 @@ export default function HomePage() {
 </section>
 
       {/* FINAL CTA */}
-      <section className="text-center space-y-6">
+      <section className="fade-in bg-pink-50 rounded-3xl p-10 space-y-8">
         <h2 className="text-3xl font-semibold">
           Thoughtful gifts start here
         </h2>
