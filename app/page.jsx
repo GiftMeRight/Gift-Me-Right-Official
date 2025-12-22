@@ -1,11 +1,37 @@
-import Image from 'next/image';
+"use client";
+
+import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export default function HomePage() {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const html = document.documentElement;
+    if (isDark) {
+      html.classList.add("dark");
+    } else {
+      html.classList.remove("dark");
+    }
+  }, [isDark]);
+
   return (
-    <main className="soft-glow min-h-screen px-6 py-12 space-y-24">
+    <main className="soft-glow min-h-screen px-6 py-12 space-y-24 relative">
+
+      {/* Dark mode toggle button */}
+      <div className="fixed top-6 right-6 z-50">
+        <button
+          onClick={() => setIsDark(!isDark)}
+          className="bg-pink-600 dark:bg-pink-400 text-white dark:text-gray-900 px-4 py-2 rounded-full shadow-lg transition transform hover:scale-105 hover:shadow-xl"
+        >
+          {isDark ? "Light Mode" : "Dark Mode"}
+        </button>
+      </div>
 
       {/* HERO */}
-      <section className="animate-fadeIn text-center space-y-6 bg-white/80 dark:bg-gray-900/80 backdrop-blur rounded-3xl p-10 shadow-sm">
+      <section className="animate-fadeIn relative text-center space-y-6 rounded-3xl p-10 shadow-sm bg-white/80 dark:bg-gray-900/80 backdrop-blur overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-tr from-pink-200 via-pink-100 to-white/0 dark:from-pink-900 dark:via-pink-800 dark:to-black/0 opacity-40 -z-10 rounded-3xl"></div>
+
         <div className="relative w-full max-w-xl mx-auto h-64 md:h-96 overflow-hidden rounded-3xl shadow-lg transition transform hover:scale-105 hover:shadow-xl">
           <Image
             src="https://images.unsplash.com/photo-1518459031867-a89b944bffe0?auto=format&fit=crop&w=1200&q=80"
@@ -32,7 +58,9 @@ export default function HomePage() {
       </section>
 
       {/* PROBLEM */}
-      <section className="animate-fadeIn space-y-6 max-w-4xl mx-auto bg-white/80 dark:bg-gray-900/80 backdrop-blur rounded-3xl p-10 shadow-sm">
+      <section className="animate-fadeIn relative space-y-6 max-w-4xl mx-auto rounded-3xl p-10 shadow-sm bg-white/80 dark:bg-gray-900/80 backdrop-blur overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-white to-white/0 dark:from-gray-800 dark:via-gray-900 dark:to-black/0 opacity-30 -z-10 rounded-3xl"></div>
+
         <h2 className="text-3xl font-semibold text-center text-gray-900 dark:text-gray-50">
           Gift-giving shouldn’t feel like a guessing game
         </h2>
@@ -43,7 +71,9 @@ export default function HomePage() {
       </section>
 
       {/* SOLUTION */}
-      <section className="animate-fadeIn bg-white/80 dark:bg-gray-900/80 backdrop-blur rounded-3xl p-10 space-y-8 shadow-sm">
+      <section className="animate-fadeIn relative bg-white/80 dark:bg-gray-900/80 backdrop-blur rounded-3xl p-10 space-y-8 shadow-sm overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-pink-100 via-pink-50 to-white/0 dark:from-pink-900 dark:via-pink-800 dark:to-black/0 opacity-30 -z-10 rounded-3xl"></div>
+
         <div className="relative w-full max-w-xl mx-auto h-64 md:h-96 overflow-hidden rounded-3xl shadow-lg transition transform hover:scale-105 hover:shadow-xl">
           <Image
             src="https://images.unsplash.com/photo-1520975911775-6c50c337414d?auto=format&fit=crop&w=1200&q=80"
@@ -64,7 +94,9 @@ export default function HomePage() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="animate-fadeIn bg-white/80 dark:bg-gray-900/80 backdrop-blur rounded-3xl p-10 space-y-8 shadow-sm">
+      <section className="animate-fadeIn relative bg-white/80 dark:bg-gray-900/80 backdrop-blur rounded-3xl p-10 space-y-8 shadow-sm overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-l from-pink-50 via-white to-white/0 dark:from-gray-800 dark:via-gray-900 dark:to-black/0 opacity-25 -z-10 rounded-3xl"></div>
+
         <h2 className="text-3xl font-semibold text-center text-gray-900 dark:text-gray-50">
           How it works
         </h2>
@@ -99,42 +131,7 @@ export default function HomePage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="animate-fadeIn bg-white/80 dark:bg-gray-900/80 backdrop-blur rounded-3xl p-10 space-y-8 shadow-sm">
+      <section className="animate-fadeIn relative bg-white/80 dark:bg-gray-900/80 backdrop-blur rounded-3xl p-10 space-y-8 shadow-sm overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-t from-pink-50 via-white to-white/0 dark:from-gray-800 dark:via-gray-900 dark:to-black/0 opacity-20 -z-10 rounded-3xl"></div>
+
         <h2 className="text-3xl font-semibold text-center text-gray-900 dark:text-gray-50">
-          What people are saying
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            { text: "This changed how my partner shows love. I’ve never felt more understood.", name: "Emily" },
-            { text: "Birthdays are no longer awkward. Everyone finally gets me.", name: "Sarah" },
-            { text: "I made one for myself and one for my best friend. It’s thoughtful, fun, and emotional.", name: "Alex" },
-          ].map((item, idx) => (
-            <div key={idx} className="bg-white/90 dark:bg-gray-800 rounded-2xl p-6 shadow-sm transition transform hover:scale-105 hover:shadow-lg">
-              <p className="text-gray-700 dark:text-gray-300">{item.text}</p>
-              <p className="mt-4 font-semibold text-gray-900 dark:text-gray-50">— {item.name}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* FINAL CTA */}
-      <section className="animate-fadeIn bg-white/80 dark:bg-gray-900/80 backdrop-blur rounded-3xl p-10 space-y-8 shadow-sm text-center">
-        <h2 className="text-3xl font-semibold text-gray-900 dark:text-gray-50">
-          Thoughtful gifts start here
-        </h2>
-        <p className="text-gray-700 dark:text-gray-300 text-lg max-w-2xl mx-auto">
-          Let’s help the people who love you… love you the right way.
-        </p>
-
-        <a
-          href="/create"
-          className="inline-block bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 hover:shadow-lg"
-        >
-          Get Started
-        </a>
-      </section>
-
-    </main>
-  );
-}
