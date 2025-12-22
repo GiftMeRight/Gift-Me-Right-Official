@@ -59,7 +59,6 @@ export default function HomePage() {
       {/* HERO */}
       <SectionGlow>
         <div className="relative flex flex-col items-center text-center">
-          {/* Floating hearts */}
           {Array.from({ length: 8 }).map((_, idx) => (
             <div
               key={idx}
@@ -166,6 +165,54 @@ export default function HomePage() {
               <p className="text-gray-600 dark:text-gray-300">{item.desc}</p>
             </div>
           ))}
+        </div>
+      </SectionGlow>
+
+      {/* TESTIMONIALS */}
+      <SectionGlow>
+        <h2 className="text-3xl font-semibold text-center text-gray-900 dark:text-gray-50">
+          What people are saying
+        </h2>
+        <div className="grid md:grid-cols-3 gap-6 mt-6">
+          {[
+            { img: "/images/testimonial1.jpg", name: "Emily", quote: "This completely changed how my partner shows love. I’ve never felt more understood." },
+            { img: "/images/testimonial2.jpg", name: "Sarah", quote: "Birthdays are no longer awkward. Everyone finally gets me." },
+            { img: "/images/testimonial3.jpg", name: "Alex", quote: "I made one for myself and one for my best friend. It’s thoughtful, fun, and emotional." },
+          ].map((item, idx) => (
+            <div key={idx} className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm transition transform hover:scale-105 hover:shadow-lg">
+              <div className="relative w-24 h-24 mx-auto rounded-full overflow-hidden mb-4">
+                <Image src={item.img} alt={item.name} fill className="object-cover" />
+              </div>
+              <p className="text-gray-700 dark:text-gray-300">“{item.quote}”</p>
+              <p className="mt-4 font-semibold text-gray-900 dark:text-gray-50">— {item.name}</p>
+            </div>
+          ))}
+        </div>
+      </SectionGlow>
+
+      {/* FINAL CTA */}
+      <SectionGlow>
+        <div className="relative w-full max-w-3xl h-64 md:h-96 mx-auto rounded-3xl overflow-hidden shadow-lg mb-6">
+          <Image
+            src="/images/cta-gift.jpg"
+            alt="Person opening gift"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <h2 className="text-3xl font-semibold text-center text-gray-900 dark:text-gray-50">
+          Thoughtful gifts start here
+        </h2>
+        <p className="text-gray-700 dark:text-gray-300 text-lg max-w-2xl mx-auto text-center mt-2">
+          Let’s help the people who love you… love you the right way.
+        </p>
+        <div className="flex justify-center mt-6">
+          <a
+            href="/create"
+            className="inline-block bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 hover:shadow-lg"
+          >
+            Get Started
+          </a>
         </div>
       </SectionGlow>
     </main>
