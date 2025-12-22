@@ -39,18 +39,16 @@ section {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 .animate-fadeIn {
   animation: fadeIn 1s ease forwards;
 }
 
-/* Pulsating glow animation */
+/* Pulsating gradient glow */
 @keyframes pulseGlow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
 .bg-glow {
   background: linear-gradient(
     135deg,
@@ -62,3 +60,17 @@ section {
   animation: pulseGlow 15s ease infinite;
 }
 
+/* Floating shimmer particles */
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 182, 193, 0.4);
+  border-radius: 50%;
+  animation: floatParticle linear infinite;
+}
+@keyframes floatParticle {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.6; }
+  50% { transform: translateY(-20px) translateX(10px) scale(1.2); opacity: 1; }
+  100% { transform: translateY(0) translateX(-10px) scale(1); opacity: 0.6; }
+}
