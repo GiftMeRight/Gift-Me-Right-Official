@@ -47,9 +47,9 @@ export default function HomePage() {
   }, [isDark]);
 
   return (
-    <main className="px-6 pt-1 pb-12 space-y-24 relative">
+    <main className="px-6 pt-4 pb-12 space-y-24 relative">
       {/* Dark mode toggle */}
-      <div className="fixed top-6 right-6 z-50">
+      <div className="fixed top-2 right-6 z-50">
         <button
           onClick={() => setIsDark(!isDark)}
           className="bg-pink-600 dark:bg-pink-400 text-white dark:text-gray-900 px-4 py-2 rounded-full shadow-lg transition transform hover:scale-105 hover:shadow-xl"
