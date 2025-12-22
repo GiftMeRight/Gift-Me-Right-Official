@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -45,7 +45,7 @@ export default function HomePage() {
   }, [isDark]);
 
   return (
-    <main className="soft-glow min-h-screen px-6 pt-6 pb-12 space-y-24">
+    <main className="soft-glow px-6 pt-6 pb-12 space-y-24 relative">
       {/* Dark mode toggle */}
       <div className="fixed top-6 right-6 z-50">
         <button
@@ -59,6 +59,7 @@ export default function HomePage() {
       {/* HERO */}
       <SectionGlow>
         <div className="relative flex flex-col items-center text-center">
+          {/* Floating hearts behind text */}
           {Array.from({ length: 8 }).map((_, idx) => (
             <div
               key={idx}
@@ -75,16 +76,7 @@ export default function HomePage() {
             </div>
           ))}
 
-          <div className="relative w-full max-w-3xl h-64 md:h-96 rounded-3xl overflow-hidden shadow-lg mb-6">
-            <Image
-              src="/images/hero-gift.jpg"
-              alt="Beautiful gift wrapping"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-
+          {/* Title and subtitle first */}
           <h1 className="text-4xl md:text-5xl font-bold leading-tight text-gray-900 dark:text-gray-50">
             Welcome to <span className="text-pink-600">Gift Me Right</span>
           </h1>
@@ -97,6 +89,17 @@ export default function HomePage() {
           >
             Create Your Journal
           </a>
+
+          {/* Hero image below text */}
+          <div className="relative w-full max-w-3xl h-64 md:h-96 rounded-3xl overflow-hidden shadow-lg mt-6">
+            <Image
+              src="/images/hero-gift.jpg"
+              alt="Beautiful gift wrapping"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
         </div>
       </SectionGlow>
 
