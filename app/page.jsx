@@ -61,7 +61,20 @@ export default function HomePage() {
       {/* HERO */}
       <SectionGlow className="soft-glow">
         <div className="relative flex flex-col items-center text-center">
-          {/* Floating hearts behind text */}
+          {/* Title and subtitle above hero image */}
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight text-gray-900 dark:text-gray-50">
+            Welcome to <span className="text-pink-600">Gift Me Right</span>
+          </h1>
+          <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mt-4">
+            The place where thoughtful gifting begins.
+          </p>
+          <a
+            href="/create"
+            className="mt-6 inline-block bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 hover:shadow-lg"
+          >
+            Create Your Journal
+          </a>
+                    {/* Floating hearts behind text */}
           {Array.from({ length: 8 }).map((_, idx) => (
             <div
               key={idx}
@@ -77,20 +90,6 @@ export default function HomePage() {
               ❤️
             </div>
           ))}
-
-          {/* Title and subtitle above hero image */}
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight text-gray-900 dark:text-gray-50">
-            Welcome to <span className="text-pink-600">Gift Me Right</span>
-          </h1>
-          <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mt-4">
-            The place where thoughtful gifting begins.
-          </p>
-          <a
-            href="/create"
-            className="mt-6 inline-block bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 hover:shadow-lg"
-          >
-            Create Your Journal
-          </a>
 
           {/* Hero image below text */}
           <div className="relative w-full max-w-3xl h-64 md:h-96 rounded-3xl overflow-hidden shadow-lg mt-6">
