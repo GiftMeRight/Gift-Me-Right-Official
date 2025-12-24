@@ -1,28 +1,37 @@
-import Image from "next/image"
+import Image from "next/image";
+import "./globals.css";
 
-import './globals.css'
+export const metadata = {
+  title: "Gift Me Right",
+  description: "The All About Me journal that helps people gift you right",
+};
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-  <head>
-    <link rel="icon" href="/favicon.png" />
-  </head>
+    <html lang="en" className="dark">
+      <head>
+        <link rel="icon" href="/favicon.png" />
+      </head>
 
-      <body className="p-6">
-        <header className="mb-6">
+      <body className="bg-[#fffafc] dark:bg-neutral-950 text-gray-900 dark:text-gray-100 transition-colors duration-500">
+
+        {/* HEADER */}
+        <header className="max-w-7xl mx-auto px-6 py-4">
           <Image
-  src="/logo.png"
-  alt="Gift Me Right logo"
-  width={140}
-  height={140}
-  priority
-/>
-
-
+            src="/logo.png"
+            alt="Gift Me Right logo"
+            width={140}
+            height={140}
+            priority
+          />
         </header>
-        {children}
+
+        {/* PAGE CONTENT */}
+        <main>
+          {children}
+        </main>
+
       </body>
     </html>
-  )
+  );
 }
