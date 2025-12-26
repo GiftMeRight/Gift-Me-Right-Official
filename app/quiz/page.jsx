@@ -67,8 +67,11 @@ export default function QuizPage() {
   const [started, setStarted] = useState(false);
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState([]);
+  const [showAfter, setShowAfter] = useState(false);
 
-  // 🌸 SCREEN 0 — ENTRY
+  const current = quizSteps[step];
+
+  // 🌸 ENTRY SCREEN
   if (!started) {
     return (
       <main className="min-h-screen flex items-center justify-center px-6 text-center">
@@ -94,15 +97,6 @@ export default function QuizPage() {
     );
   }
 
-  const current = quizSteps[step];
-
-  const handleAnswer = (answer) => {
-    setAnswers([...answers, answer]);
-    setTimeout(() => {
-      setStep(step + 1);
-    }, 400);
-  };
-
   // 🌟 FINAL SCREEN
   if (step >= quizSteps.length) {
     return (
@@ -127,7 +121,39 @@ export default function QuizPage() {
     );
   }
 
-  // 🧠 QUIZ QUESTIONS
+  // 💬 AFTER-TEXT SCREEN (NEW)
+  if (showAfter && current.afterText) {
+    return (
+      <main className="min-h-screen flex items-center justify-center px-6 text-center">
+        <div className="max-w-xl bg-white/90 dark:bg-gray-900/90 backdrop-blur rounded-3xl p-10 shadow-lg">
+          <p className="text-2xl text-gray-800 dark:text-gray-200 font-medium">
+            {current.afterText}
+          </p>
+
+          <button
+            onClick={() => {
+              setShowAfter(false);
+              setStep(step + 1);
+            }}
+            className="mt-8 bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition hover:scale-105"
+          >
+            Continue →
+          </button>
+        </div>
+      </main>
+    );
+  }
+
+  // 🧠 QUESTION SCREEN
+  const handleAnswer = (answer) => {
+    setAnswers([...answers, answer]);
+    if (current.afterText) {
+      setShowAfter(true);
+    } else {
+      setStep(step + 1);
+    }
+  };
+
   return (
     <main className="min-h-screen flex items-center justify-center px-6">
       <div className="max-w-xl w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur rounded-3xl p-10 shadow-lg">
@@ -156,12 +182,6 @@ export default function QuizPage() {
             </button>
           ))}
         </div>
-
-        {current.afterText && (
-          <p className="text-gray-600 dark:text-gray-400 mt-6 italic">
-            {current.afterText}
-          </p>
-        )}
       </div>
     </main>
   );
