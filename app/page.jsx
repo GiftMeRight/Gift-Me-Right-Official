@@ -82,25 +82,30 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* CTA */}
-          <a
-            href="/create"
-            className="mt-6 inline-block bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 hover:shadow-lg"
-          >
-            Create Your Journal
-          </a>
-<a
-  href="/quiz"
-  className="mt-6 inline-block bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 hover:shadow-lg text-center"
->
-  💖 Take the “All About Me” Quiz
-  <span className="block text-sm font-normal opacity-90 mt-1">
-    Takes ~2 minutes
-  </span>
-</a>
+          {/* PRIMARY + SECONDARY CTA */}
+          <div className="mt-8 flex flex-col items-center gap-4">
+            {/* Primary: Direct Builder */}
+            <a
+              href="/create"
+              className="inline-block bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 hover:shadow-lg"
+            >
+              Create Your Journal
+            </a>
+
+            {/* Secondary: Quiz */}
+            <a
+              href="/quiz"
+              className="inline-block border border-pink-400 text-pink-600 dark:text-pink-400 px-8 py-3 rounded-full text-base font-medium transition transform hover:scale-105 hover:bg-pink-50 dark:hover:bg-gray-800 text-center"
+            >
+              💖 Take the “All About Me” Quiz
+              <span className="block text-sm opacity-80 mt-1">
+                Takes ~2 minutes
+              </span>
+            </a>
+          </div>
 
           {/* Hero image */}
-          <div className="relative w-full max-w-3xl h-64 md:h-96 rounded-3xl overflow-hidden shadow-lg mt-8">
+          <div className="relative w-full max-w-3xl h-64 md:h-96 rounded-3xl overflow-hidden shadow-lg mt-10">
             <Image
               src="/images/hero-gift.jpg"
               alt="Beautiful gift wrapping"
@@ -225,7 +230,6 @@ export default function HomePage() {
           ))}
         </div>
       </SectionGlow>
-
 
       {/* FINAL CTA */}
       <SectionGlow>
