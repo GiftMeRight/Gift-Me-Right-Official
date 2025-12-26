@@ -64,19 +64,19 @@ const quizSteps = [
 ];
 
 export default function QuizPage() {
-  const [started, setStarted] = useState(false); // 👈 SCREEN 0 CONTROL
+  const [started, setStarted] = useState(false);
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState([]);
 
-  // 🌸 SCREEN 0 — ENTRY SCREEN
+  // 🌸 SCREEN 0 — ENTRY
   if (!started) {
     return (
       <main className="min-h-screen flex items-center justify-center px-6 text-center">
-        <div className="max-w-xl bg-white/90 backdrop-blur rounded-3xl p-10 shadow-lg">
-          <h1 className="text-3xl font-bold text-gray-900">
+        <div className="max-w-xl bg-white/90 dark:bg-gray-900/90 backdrop-blur rounded-3xl p-10 shadow-lg">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
             Let’s create a journal that helps people gift you right 💖
           </h1>
-          <p className="text-gray-700 mt-4">
+          <p className="text-gray-700 dark:text-gray-300 mt-4">
             Answer a few quick questions so we can personalize your “All About Me”
             journal perfectly.
           </p>
@@ -100,18 +100,18 @@ export default function QuizPage() {
     setAnswers([...answers, answer]);
     setTimeout(() => {
       setStep(step + 1);
-    }, 500);
+    }, 400);
   };
 
-  // 🌟 FINAL TRANSITION SCREEN
+  // 🌟 FINAL SCREEN
   if (step >= quizSteps.length) {
     return (
       <main className="min-h-screen flex items-center justify-center px-6 text-center">
-        <div className="max-w-xl bg-white/90 backdrop-blur rounded-3xl p-10 shadow-lg">
-          <h1 className="text-3xl font-bold text-gray-900">
+        <div className="max-w-xl bg-white/90 dark:bg-gray-900/90 backdrop-blur rounded-3xl p-10 shadow-lg">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
             You’re exactly who this journal was made for ✨
           </h1>
-          <p className="text-gray-700 mt-4">
+          <p className="text-gray-700 dark:text-gray-300 mt-4">
             Based on your answers, we’ll personalize your journal so the people in
             your life can finally gift you right.
           </p>
@@ -130,12 +130,12 @@ export default function QuizPage() {
   // 🧠 QUIZ QUESTIONS
   return (
     <main className="min-h-screen flex items-center justify-center px-6">
-      <div className="max-w-xl w-full bg-white/90 backdrop-blur rounded-3xl p-10 shadow-lg">
+      <div className="max-w-xl w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur rounded-3xl p-10 shadow-lg">
         <p className="text-sm text-gray-500 mb-2">
           Question {step + 1} of {quizSteps.length}
         </p>
 
-        <h1 className="text-2xl font-semibold text-gray-900 mb-6">
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
           {current.question}
         </h1>
 
@@ -144,7 +144,13 @@ export default function QuizPage() {
             <button
               key={idx}
               onClick={() => handleAnswer(opt)}
-              className="w-full text-left px-5 py-4 rounded-xl border border-gray-200 hover:border-pink-500 hover:bg-pink-50 transition"
+              className="
+                w-full text-left px-6 py-4 rounded-xl border
+                bg-gray-100 text-gray-900 border-gray-300
+                dark:bg-gray-800 dark:text-white dark:border-gray-600
+                hover:bg-pink-100 dark:hover:bg-gray-700
+                transition
+              "
             >
               {opt}
             </button>
@@ -152,7 +158,9 @@ export default function QuizPage() {
         </div>
 
         {current.afterText && (
-          <p className="text-gray-600 mt-6 italic">{current.afterText}</p>
+          <p className="text-gray-600 dark:text-gray-400 mt-6 italic">
+            {current.afterText}
+          </p>
         )}
       </div>
     </main>
