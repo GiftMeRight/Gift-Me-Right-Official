@@ -55,12 +55,20 @@ export default function CreatePage() {
             "It’s a gift for someone else",
             "I’m just curious",
           ].map((option) => (
-            <button
-              key={option}
-              className="w-full px-6 py-4 rounded-xl border border-gray-300 dark:border-gray-700 hover:bg-pink-50 dark:hover:bg-gray-800 transition text-left"
-            >
-              {option}
-            </button>
+<button
+  key={option}
+  className="
+    w-full px-6 py-4 rounded-xl border
+    border-gray-300 dark:border-gray-700
+    bg-white dark:bg-gray-900
+    text-gray-900 dark:text-gray-100
+    hover:bg-pink-50 dark:hover:bg-gray-800
+    transition text-left
+  "
+>
+  {option}
+</button>
+
           ))}
         </div>
       </div>
