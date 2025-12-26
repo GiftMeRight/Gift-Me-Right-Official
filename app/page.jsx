@@ -89,6 +89,15 @@ export default function HomePage() {
           >
             Create Your Journal
           </a>
+<a
+  href="/quiz"
+  className="mt-6 inline-block bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 hover:shadow-lg text-center"
+>
+  💖 Take the “All About Me” Quiz
+  <span className="block text-sm font-normal opacity-90 mt-1">
+    Takes ~2 minutes
+  </span>
+</a>
 
           {/* Hero image */}
           <div className="relative w-full max-w-3xl h-64 md:h-96 rounded-3xl overflow-hidden shadow-lg mt-8">
