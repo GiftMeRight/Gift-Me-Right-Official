@@ -181,9 +181,23 @@ export default function HomePage() {
 
         <div className="grid md:grid-cols-3 gap-8 mt-8">
           {[
-            { img: "/images/testimonial1.jpg", name: "Emily" },
-            { img: "/images/testimonial2.jpg", name: "Sarah" },
-            { img: "/images/testimonial3.jpg", name: "Alex" },
+            {
+              img: "/images/testimonial1.jpg",
+              name: "Emily",
+              quote: "Birthdays are no longer awkward. Everyone finally gets me.",
+            },
+            {
+              img: "/images/testimonial2.jpg",
+              name: "Sarah",
+              quote:
+                "This completely changed how my partner shows love. I’ve never felt more understood.",
+            },
+            {
+              img: "/images/testimonial3.jpg",
+              name: "Alex",
+              quote:
+                "I made one for myself and one for my best friend. It’s thoughtful, fun, and emotional.",
+            },
           ].map((item, idx) => (
             <div
               key={idx}
@@ -193,7 +207,7 @@ export default function HomePage() {
                 <Image src={item.img} alt={item.name} fill className="object-cover" />
               </div>
               <p className="text-gray-700 dark:text-gray-300 text-center">
-                “This journal changed how people gift me.”
+                “{item.quote}”
               </p>
               <p className="mt-4 font-semibold text-center text-gray-900 dark:text-gray-50">
                 — {item.name}
@@ -202,6 +216,7 @@ export default function HomePage() {
           ))}
         </div>
       </SectionGlow>
+
 
       {/* FINAL CTA */}
       <SectionGlow>
