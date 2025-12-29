@@ -42,9 +42,11 @@ export default function CreateJournalPage() {
   };
 
   const handleCheckout = async () => {
+    // Save locally for success page
     localStorage.setItem("journalAnswers", JSON.stringify(answers));
     localStorage.setItem("journalFormat", format);
 
+    // Call Stripe API
     const res = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -53,8 +55,14 @@ export default function CreateJournalPage() {
         metadata: { answers: JSON.stringify(answers), format },
       }),
     });
+
     const data = await res.json();
-    if (data.url) window.location.href = data.url;
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert("Oops! Something went wrong. Please try again.");
+      console.error(data);
+    }
   };
 
   return (
@@ -96,7 +104,10 @@ export default function CreateJournalPage() {
                     placeholder="Write your message here"
                     className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-pink-300 dark:focus:ring-pink-600"
                     onChange={(e) =>
-                      setAnswers((prev) => ({ ...prev, giftMessage: e.target.value }))
+                      setAnswers((prev) => ({
+                        ...prev,
+                        giftMessage: e.target.value,
+                      }))
                     }
                   />
                   <button
@@ -109,6 +120,7 @@ export default function CreateJournalPage() {
               )}
             </motion.div>
           ) : (
+            // ✅ LAST STEP: SHOW ONLY PROCEED TO CHECKOUT
             <motion.div
               key="checkout"
               initial={{ opacity: 0, y: 30 }}
@@ -124,47 +136,14 @@ export default function CreateJournalPage() {
                 className="w-full bg-pink-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition transform"
               >
                 Proceed to Checkout 💌
+                <span className="block text-sm mt-1 opacity-80">
+                  You’re almost done 💖
+                </span>
               </button>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
-      {/* ---------------- FINISH & PAY ---------------- */}
-<div className="flex justify-center mt-8">
-  <button
-    onClick={async () => {
-      try {
-        // Save answers locally
-        localStorage.setItem("journalAnswers", JSON.stringify(answers));
-        localStorage.setItem("journalFormat", format); // e.g., "printed" or "digital"
-
-        // Call Stripe checkout API
-        const res = await fetch("/api/checkout", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ answers, format }),
-        });
-
-        const data = await res.json();
-
-        if (data.url) {
-          // Redirect to Stripe checkout
-          window.location.href = data.url;
-        } else {
-          console.error("Stripe session creation failed", data);
-          alert("Oops! Something went wrong. Please try again.");
-        }
-      } catch (err) {
-        console.error("Checkout error:", err);
-        alert("Checkout failed. Please try again.");
-      }
-    }}
-    className="bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition shadow-lg"
-  >
-    Finish & Pay →
-    <span className="block text-sm mt-1 opacity-80">You’re almost done 💖</span>
-  </button>
-</div>
     </main>
   );
 }
