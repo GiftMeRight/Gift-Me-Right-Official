@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSession, signIn } from "next-auth/react";
 
@@ -9,6 +9,7 @@ export default function CreateJournalPage() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState({});
   const [format, setFormat] = useState("digital"); // default format
+  const [loaded, setLoaded] = useState(false); // ensure localStorage loads first
 
   // ✅ Require login
   if (!session) {
@@ -29,21 +30,39 @@ export default function CreateJournalPage() {
     { key: "cover", question: "Choose Your Cover", options: ["Pink Heart", "Gold Foil", "Soft Pastel"] },
     { key: "storyteller", question: "Who will be telling the stories?", options: ["Me", "Someone else"] },
     { key: "recipient", question: "Who is this for?", options: ["Partner", "Family", "Friend"] },
-    { key: "giftMessage", question: "Add a Gift Message", options: [] }, // free text
+    { key: "giftMessage", question: "Add a Gift Message", options: [] },
     { key: "format", question: "Choose your journal format", options: ["Digital", "Printed"] },
   ];
 
+  // ✅ Load saved progress if it exists
+  useEffect(() => {
+    const savedAnswers = localStorage.getItem(`journalAnswers_${session.user.email}`);
+    const savedStep = localStorage.getItem(`journalStep_${session.user.email}`);
+    const savedFormat = localStorage.getItem(`journalFormat_${session.user.email}`);
+
+    if (savedAnswers) setAnswers(JSON.parse(savedAnswers));
+    if (savedStep) setStep(Number(savedStep));
+    if (savedFormat) setFormat(savedFormat);
+
+    setLoaded(true);
+  }, [session]);
+
   const handleAnswer = (key, value) => {
-    setAnswers((prev) => ({ ...prev, [key]: value }));
+    const updatedAnswers = { ...answers, [key]: value };
+    setAnswers(updatedAnswers);
     setStep(step + 1);
+
+    // Save progress to localStorage per user
+    localStorage.setItem(`journalAnswers_${session.user.email}`, JSON.stringify(updatedAnswers));
+    localStorage.setItem(`journalStep_${session.user.email}`, step + 1);
+    if (key === "format") localStorage.setItem(`journalFormat_${session.user.email}`, value);
   };
 
   const handleCheckout = async () => {
-    // Save locally for success page
-    localStorage.setItem("journalAnswers", JSON.stringify(answers));
-    localStorage.setItem("journalFormat", format);
+    // Save final answers before checkout
+    localStorage.setItem(`journalAnswers_${session.user.email}`, JSON.stringify(answers));
+    localStorage.setItem(`journalFormat_${session.user.email}`, format);
 
-    // Call Stripe API
     const res = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -61,6 +80,8 @@ export default function CreateJournalPage() {
       console.error(data);
     }
   };
+
+  if (!loaded) return null; // wait until localStorage is loaded
 
   return (
     <main className="min-h-screen flex items-center justify-center px-6 py-16 bg-gradient-to-b from-pink-50 to-white dark:from-gray-900 dark:to-gray-800">
@@ -100,10 +121,7 @@ export default function CreateJournalPage() {
                     placeholder="Write your message here"
                     value={answers.giftMessage || ""}
                     onChange={(e) =>
-                      setAnswers((prev) => ({
-                        ...prev,
-                        giftMessage: e.target.value,
-                      }))
+                      handleAnswer("giftMessage", e.target.value)
                     }
                     className="w-full h-32 px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-300 dark:focus:ring-pink-600 resize-none mb-4"
                   />
@@ -111,7 +129,6 @@ export default function CreateJournalPage() {
               )}
             </motion.div>
           ) : (
-            // ✅ LAST STEP: SHOW ONLY PROCEED TO CHECKOUT
             <motion.div
               key="checkout"
               initial={{ opacity: 0, y: 30 }}
