@@ -7,16 +7,20 @@ export default function JournalPage() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState({});
 
-  const steps = [
-    { key: "favorites", question: "Favorites", description: "Foods, drinks, places, and activities you love" },
-    { key: "giftingStyle", question: "Gifting Style", description: "Practical, sentimental, experiences, or surprises?" },
-    { key: "loveLanguage", question: "Love Language", description: "How you feel most appreciated" },
-    { key: "comfort", question: "Comfort", description: "What helps you feel better on hard days" },
-    { key: "surprises", question: "Surprises", description: "What delights you — and what you don’t enjoy" },
-    { key: "petPeeves", question: "Pet Peeves", description: "The little things people should know" },
-    { key: "rituals", question: "Rituals", description: "Routines or traditions that matter to you" },
-    { key: "customQuestion", question: "Add Your Own Question", description: "Write any question or topic you want to include" },
-  ];
+const steps = [
+  { key: "favorites", question: "Favorites", description: "Foods, drinks, places, and activities you love" },
+  { key: "giftingStyle", question: "Gifting Style", description: "Practical, sentimental, experiences, or surprises?" },
+  { key: "loveLanguage", question: "Love Language", description: "How you feel most appreciated" },
+  { key: "comfort", question: "Comfort", description: "What helps you feel better on hard days" },
+  { key: "surprises", question: "Surprises", description: "What delights you — and what you don’t enjoy" },
+  { key: "petPeeves", question: "Pet Peeves", description: "The little things people should know" },
+  { key: "rituals", question: "Rituals", description: "Routines or traditions that matter to you" },
+  { key: "goals", question: "Life Goals", description: "What do you hope to achieve or experience?" },
+  { key: "memorableMoments", question: "Memorable Moments", description: "Your favorite memories from childhood or adulthood" },
+  { key: "advice", question: "Advice or Wisdom", description: "What advice would you give to your loved ones?" },
+  { key: "customQuestion", question: "Add Your Own Question", description: "Write any question or topic you want to include" },
+];
+
 
   useEffect(() => {
     const saved = localStorage.getItem("journalAnswers");
