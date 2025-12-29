@@ -45,7 +45,7 @@ export default function CreatePage() {
         {step === 0 && (
           <>
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Choose your journal cover
+              Choose your journal cover color
             </h1>
             <p className="text-gray-700 dark:text-gray-300 mb-8">
               Pick the one that feels most like you.
