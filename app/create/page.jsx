@@ -99,23 +99,17 @@ export default function CreateJournalPage() {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  <input
-                    type="text"
+                  <textarea
                     placeholder="Write your message here"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-pink-300 dark:focus:ring-pink-600"
+                    value={answers.giftMessage || ""}
                     onChange={(e) =>
                       setAnswers((prev) => ({
                         ...prev,
                         giftMessage: e.target.value,
                       }))
                     }
+                    className="w-full h-32 px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-300 dark:focus:ring-pink-600 resize-none mb-4"
                   />
-                  <button
-                    onClick={handleCheckout}
-                    className="mt-4 w-full bg-pink-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition transform"
-                  >
-                    Proceed to Checkout 💖
-                  </button>
                 </div>
               )}
             </motion.div>
