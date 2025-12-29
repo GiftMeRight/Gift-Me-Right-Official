@@ -5,8 +5,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req) {
   try {
-    // Parse JSON body
-    const { answers, format } = await req.json();
+    const { answers } = await req.json();
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
@@ -18,12 +17,12 @@ export async function POST(req) {
             product_data: {
               name: "All About Me Journal",
               description: "A personalized journal that helps people gift you right",
-              metadata: {
-                format: format || "unknown",
-                answers: JSON.stringify(answers || []),
-              },
+              metadata: answers.reduce((acc, val, i) => {
+                acc[`answer_${i + 1}`] = val;
+                return acc;
+              }, {}),
             },
-            unit_amount: 2900, // $29.00
+            unit_amount: 2900,
           },
           quantity: 1,
         },
@@ -34,7 +33,6 @@ export async function POST(req) {
 
     return NextResponse.json({ url: session.url });
   } catch (err) {
-    console.error("Stripe checkout error:", err);
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
