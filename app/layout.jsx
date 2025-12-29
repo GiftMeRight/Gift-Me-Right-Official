@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
 
 export const metadata = {
   title: "Gift Me Right",
@@ -27,9 +30,9 @@ export default function RootLayout({ children }) {
         </header>
 
         {/* PAGE CONTENT */}
-        <main>
-          {children}
-        </main>
+        <SessionProvider>
+          <main>{children}</main>
+        </SessionProvider>
 
       </body>
     </html>
