@@ -58,28 +58,33 @@ export default function CreateJournalPage() {
     if (key === "format") localStorage.setItem(`journalFormat_${session.user.email}`, value);
   };
 
-  const handleCheckout = async () => {
-    // Save final answers before checkout
-    localStorage.setItem(`journalAnswers_${session.user.email}`, JSON.stringify(answers));
-    localStorage.setItem(`journalFormat_${session.user.email}`, format);
+const handleCheckout = async () => {
+  // Save answers locally for success page
+  localStorage.setItem("journalAnswers", JSON.stringify(answers));
+  localStorage.setItem("journalFormat", format);
 
-    const res = await fetch("/api/checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        items: [{ name: "All About Me Journal", amount: 2900, quantity: 1 }],
-        metadata: { answers: JSON.stringify(answers), format },
-      }),
-    });
+  // Call Stripe API
+  const res = await fetch("/api/checkout", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      items: [{ name: "All About Me Journal", amount: 2900, quantity: 1 }],
+      metadata: {
+        answers: JSON.stringify(answers),
+        format,
+        email: session.user.email // <--- make sure you have session.user.email available
+      },
+    }),
+  });
 
-    const data = await res.json();
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      alert("Oops! Something went wrong. Please try again.");
-      console.error(data);
-    }
-  };
+  const data = await res.json();
+  if (data.url) {
+    window.location.href = data.url;
+  } else {
+    alert("Oops! Something went wrong. Please try again.");
+    console.error(data);
+  }
+};
 
   if (!loaded) return null; // wait until localStorage is loaded
 
