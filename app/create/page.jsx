@@ -129,6 +129,42 @@ export default function CreateJournalPage() {
           )}
         </AnimatePresence>
       </div>
+      {/* ---------------- FINISH & PAY ---------------- */}
+<div className="flex justify-center mt-8">
+  <button
+    onClick={async () => {
+      try {
+        // Save answers locally
+        localStorage.setItem("journalAnswers", JSON.stringify(answers));
+        localStorage.setItem("journalFormat", format); // e.g., "printed" or "digital"
+
+        // Call Stripe checkout API
+        const res = await fetch("/api/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ answers, format }),
+        });
+
+        const data = await res.json();
+
+        if (data.url) {
+          // Redirect to Stripe checkout
+          window.location.href = data.url;
+        } else {
+          console.error("Stripe session creation failed", data);
+          alert("Oops! Something went wrong. Please try again.");
+        }
+      } catch (err) {
+        console.error("Checkout error:", err);
+        alert("Checkout failed. Please try again.");
+      }
+    }}
+    className="bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition shadow-lg"
+  >
+    Finish & Pay →
+    <span className="block text-sm mt-1 opacity-80">You’re almost done 💖</span>
+  </button>
+</div>
     </main>
   );
 }
