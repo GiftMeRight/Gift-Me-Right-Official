@@ -190,11 +190,24 @@ export default function CreatePage() {
               )}
             </div>
 
-            <button
-              className="mt-8 w-full bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition"
-            >
-              Create My Journal 💖
-            </button>
+<button
+  onClick={async () => {
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        product: "all-about-me-journal",
+      }),
+    });
+
+    const data = await res.json();
+    window.location.href = data.url;
+  }}
+  className="bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition"
+>
+  Finish & Pay →
+</button>
+
 
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-4 text-center">
               You’ll be able to review everything before payment.
