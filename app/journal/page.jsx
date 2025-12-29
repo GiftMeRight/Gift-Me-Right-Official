@@ -44,11 +44,15 @@ export default function JournalPage() {
       <div className="max-w-xl w-full bg-white/90 dark:bg-gray-900/80 backdrop-blur rounded-3xl p-10 shadow-lg text-center">
         <h1 className="text-2xl md:text-3xl font-bold mb-2">{current.question}</h1>
         <p className="text-gray-700 dark:text-gray-300 mb-6">{current.description}</p>
-        <textarea
-          className="w-full h-32 px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-pink-300 dark:focus:ring-pink-600 resize-none mb-4"
-          value={answers[current.key] || ""}
-          onChange={(e) => setAnswers({ ...answers, [current.key]: e.target.value })}
-        />
+<textarea
+  className="w-full h-32 px-4 py-3 rounded-xl border border-gray-300 
+             dark:border-gray-600 bg-white dark:bg-gray-800 
+             text-gray-900 dark:text-gray-50 
+             focus:outline-none focus:ring-2 focus:ring-pink-300 dark:focus:ring-pink-600 
+             resize-none mb-4"
+  value={answers[current.key] || ""}
+  onChange={(e) => setAnswers({ ...answers, [current.key]: e.target.value })}
+/>
         <button
           onClick={handleNext}
           disabled={!answers[current.key]}
