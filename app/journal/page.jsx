@@ -4,8 +4,30 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function JournalPage() {
-  const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState({});
+  const { data: session } = useSession();
+
+  // ✅ If not logged in, show sign-in prompt
+  if (!session) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        <p className="mb-4 text-gray-700">Please sign in to continue your journal.</p>
+        <button
+          onClick={() => signIn("google")}
+          className="bg-pink-600 text-white px-6 py-3 rounded-full"
+        >
+          Sign in with Google
+        </button>
+      </div>
+    );
+  }
+
+  // ✅ If logged in, show the actual journal content
+  return (
+    <main className="min-h-screen flex flex-col items-center justify-center px-6 py-16 bg-gradient-to-b from-pink-50 to-white dark:from-gray-900 dark:to-gray-800">
+      {/* ...existing journal content here... */}
+    </main>
+  );
+}
 
 const steps = [
   { key: "favorites", question: "Favorites", description: "Foods, drinks, places, and activities you love" },
