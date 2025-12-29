@@ -23,17 +23,22 @@ export default function JournalPage() {
     { key: "customQuestion", question: "Add Your Own Question", description: "Write any question or topic you want to include" },
   ];
 
-  // Load saved answers on mount
+  // Load saved answers for this user
   useEffect(() => {
-    const saved = localStorage.getItem("journalAnswers");
-    if (saved) setAnswers(JSON.parse(saved));
-  }, []);
+    if (session?.user?.email) {
+      const saved = localStorage.getItem(`journalAnswers_${session.user.email}`);
+      if (saved) setAnswers(JSON.parse(saved));
+    }
+  }, [session]);
 
   const handleNext = () => {
-    localStorage.setItem("journalAnswers", JSON.stringify(answers));
+    if (session?.user?.email) {
+      localStorage.setItem(`journalAnswers_${session.user.email}`, JSON.stringify(answers));
+    }
     setStep(step + 1);
   };
 
+  // 🔑 Require login
   if (!session) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-pink-50 to-white dark:from-gray-900 dark:to-gray-800">
@@ -48,6 +53,7 @@ export default function JournalPage() {
     );
   }
 
+  // 🔑 Journal completed
   if (step >= steps.length) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-6 py-16 bg-gradient-to-b from-pink-50 to-white dark:from-gray-900 dark:to-gray-800 text-center">
