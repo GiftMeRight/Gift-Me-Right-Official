@@ -1,221 +1,133 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
-/* ---------------- DATA ---------------- */
-
-const covers = [
-  { id: "blush", label: "Soft Blush", img: "/images/cover-blush.jpg" },
-  { id: "cream", label: "Linen Cream", img: "/images/cover-cream.jpg" },
-  { id: "black", label: "Modern Black", img: "/images/cover-black.jpg" },
-  { id: "floral", label: "Floral Romantic", img: "/images/cover-floral.jpg" },
-];
-
-const readerOptions = [
-  "My partner",
-  "My family",
-  "Friends",
-  "Anyone who shops for me",
-  "Just for me",
-];
-
-/* ---------------- PAGE ---------------- */
-
-export default function CreatePage() {
+export default function CreateJournalPage() {
   const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [format, setFormat] = useState("digital"); // default format
 
-  const [cover, setCover] = useState(null);
-  const [reader, setReader] = useState(null);
-  const [isGift, setIsGift] = useState(null);
-  const [giftMessage, setGiftMessage] = useState("");
+  const steps = [
+    {
+      key: "cover",
+      question: "Choose Your Cover",
+      options: ["Pink Heart", "Gold Foil", "Soft Pastel"],
+    },
+    {
+      key: "storyteller",
+      question: "Who will be telling the stories?",
+      options: ["Me", "Someone else"],
+    },
+    {
+      key: "recipient",
+      question: "Who is this for?",
+      options: ["Partner", "Family", "Friend"],
+    },
+    {
+      key: "giftMessage",
+      question: "Add a Gift Message",
+      options: [], // free text
+    },
+    {
+      key: "format",
+      question: "Choose your journal format",
+      options: ["Digital", "Printed"],
+    },
+  ];
 
-  /* ---------------- STEP SCREENS ---------------- */
+  const handleAnswer = (key, value) => {
+    setAnswers((prev) => ({ ...prev, [key]: value }));
+    setStep(step + 1);
+  };
 
-  return (
-    <main className="min-h-screen flex items-center justify-center px-6 py-16">
-      <div className="max-w-2xl w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur rounded-3xl p-10 shadow-xl">
+  const handleCheckout = async () => {
+    localStorage.setItem("journalAnswers", JSON.stringify(answers));
+    localStorage.setItem("journalFormat", format);
 
-        {/* STEP INDICATOR */}
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-          Step {step + 1} of 5
-        </p>
-
-        {/* ---------------- STEP 1: COVER ---------------- */}
-        {step === 0 && (
-          <>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Choose your journal cover color
-            </h1>
-            <p className="text-gray-700 dark:text-gray-300 mb-8">
-              Pick the one that feels most like you.
-            </p>
-
-            <div className="grid grid-cols-2 gap-6">
-              {covers.map((c) => (
-                <button
-                  key={c.id}
-                  onClick={() => {
-                    setCover(c);
-                    setStep(1);
-                  }}
-                  className={`rounded-2xl overflow-hidden border transition
-                    ${
-                      cover?.id === c.id
-                        ? "border-pink-500"
-                        : "border-gray-200 dark:border-gray-700"
-                    }
-                    hover:scale-[1.02]
-                  `}
-                >
-                  <div className="relative h-40 w-full">
-                    <Image src={c.img} alt={c.label} fill className="object-cover" />
-                  </div>
-                  <p className="py-3 font-medium text-gray-900 dark:text-white">
-                    {c.label}
-                  </p>
-                </button>
-              ))}
-            </div>
-          </>
-        )}
-
-        {/* ---------------- STEP 2: WHO WILL READ ---------------- */}
-        {step === 1 && (
-          <>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Who will be reading this?
-            </h1>
-            <p className="text-gray-700 dark:text-gray-300 mb-8">
-              This helps shape the tone of your journal.
-            </p>
-
-            <div className="space-y-4">
-              {readerOptions.map((opt) => (
-                <button
-                  key={opt}
-                  onClick={() => {
-                    setReader(opt);
-                    setStep(2);
-                  }}
-                  className="w-full px-6 py-4 rounded-xl border
-                    bg-gray-100 dark:bg-gray-800
-                    text-gray-900 dark:text-white
-                    border-gray-300 dark:border-gray-600
-                    hover:bg-pink-100 dark:hover:bg-gray-700
-                    transition text-left"
-                >
-                  {opt}
-                </button>
-              ))}
-            </div>
-          </>
-        )}
-
-        {/* ---------------- STEP 3: IS THIS A GIFT ---------------- */}
-        {step === 2 && (
-          <>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Is this a gift?
-            </h1>
-
-            <div className="space-y-4 mt-8">
-              <button
-                onClick={() => {
-                  setIsGift(false);
-                  setStep(4);
-                }}
-                className="w-full px-6 py-4 rounded-xl bg-gray-100 dark:bg-gray-800
-                  text-gray-900 dark:text-white hover:bg-pink-100 dark:hover:bg-gray-700 transition"
-              >
-                This is for me
-              </button>
-
-              <button
-                onClick={() => {
-                  setIsGift(true);
-                  setStep(3);
-                }}
-                className="w-full px-6 py-4 rounded-xl bg-gray-100 dark:bg-gray-800
-                  text-gray-900 dark:text-white hover:bg-pink-100 dark:hover:bg-gray-700 transition"
-              >
-                This is a gift
-              </button>
-            </div>
-          </>
-        )}
-
-        {/* ---------------- STEP 4: GIFT MESSAGE ---------------- */}
-        {step === 3 && (
-          <>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Add a gift message
-            </h1>
-            <p className="text-gray-700 dark:text-gray-300 mb-4">
-              This will appear at the front of the journal.
-            </p>
-
-            <textarea
-              value={giftMessage}
-              onChange={(e) => setGiftMessage(e.target.value)}
-              placeholder="To the people who love me..."
-              className="w-full h-32 p-4 rounded-xl border
-                bg-white dark:bg-gray-800
-                text-gray-900 dark:text-white
-                border-gray-300 dark:border-gray-600"
-            />
-
-            <button
-              onClick={() => setStep(4)}
-              className="mt-6 bg-pink-600 text-white px-8 py-4 rounded-full font-semibold hover:scale-105 transition"
-            >
-              Continue →
-            </button>
-          </>
-        )}
-
-        {/* ---------------- STEP 5: REVIEW ---------------- */}
-        {step === 4 && (
-          <>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-              Review & finish
-            </h1>
-
-            <div className="space-y-3 text-gray-700 dark:text-gray-300">
-              <p><strong>Cover:</strong> {cover?.label}</p>
-              <p><strong>Readers:</strong> {reader}</p>
-              <p><strong>Gift:</strong> {isGift ? "Yes" : "No"}</p>
-              {isGift && giftMessage && (
-                <p><strong>Message:</strong> “{giftMessage}”</p>
-              )}
-            </div>
-
-<button
-  onClick={async () => {
     const res = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        product: "all-about-me-journal",
-        answers,
+        items: [{ name: "All About Me Journal", amount: 2900, quantity: 1 }],
+        metadata: { answers: JSON.stringify(answers), format },
       }),
     });
-
     const data = await res.json();
-    window.location.href = data.url;
-  }}
-  className="bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition"
->
-  Finish & Pay →
-</button>
+    if (data.url) window.location.href = data.url;
+  };
 
+  return (
+    <main className="min-h-screen flex items-center justify-center px-6 py-16 bg-gradient-to-b from-pink-50 to-white dark:from-gray-900 dark:to-gray-800">
+      <div className="relative max-w-xl w-full bg-white/90 dark:bg-gray-900/80 backdrop-blur rounded-3xl p-10 shadow-lg text-center">
+        <AnimatePresence mode="wait">
+          {step < steps.length ? (
+            <motion.div
+              key={steps[step].key}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-50 mb-6">
+                {steps[step].question}
+              </h1>
 
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-4 text-center">
-              You’ll be able to review everything before payment.
-            </p>
-          </>
-        )}
-
+              {steps[step].options.length > 0 ? (
+                <div className="space-y-4">
+                  {steps[step].options.map((opt) => (
+                    <button
+                      key={opt}
+                      onClick={() =>
+                        steps[step].key === "format"
+                          ? (setFormat(opt), handleAnswer("format", opt))
+                          : handleAnswer(steps[step].key, opt)
+                      }
+                      className="w-full px-6 py-3 rounded-xl bg-pink-50 dark:bg-pink-700 text-pink-900 dark:text-white hover:bg-pink-100 dark:hover:bg-pink-600 transition shadow-md"
+                    >
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  <input
+                    type="text"
+                    placeholder="Write your message here"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-pink-300 dark:focus:ring-pink-600"
+                    onChange={(e) =>
+                      setAnswers((prev) => ({ ...prev, giftMessage: e.target.value }))
+                    }
+                  />
+                  <button
+                    onClick={handleCheckout}
+                    className="mt-4 w-full bg-pink-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition transform"
+                  >
+                    Proceed to Checkout 💖
+                  </button>
+                </div>
+              )}
+            </motion.div>
+          ) : (
+            <motion.div
+              key="checkout"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-50 mb-6">
+                You’re almost done! 💖
+              </h1>
+              <button
+                onClick={handleCheckout}
+                className="w-full bg-pink-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition transform"
+              >
+                Proceed to Checkout 💌
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </main>
   );
