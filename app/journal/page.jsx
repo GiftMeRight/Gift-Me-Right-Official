@@ -3,9 +3,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSession, signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 
 export default function JournalPage() {
   const { data: session } = useSession();
+  const searchParams = useSearchParams();
+  const emailFromQuery = searchParams.get("email");
+
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState({});
 
@@ -23,26 +27,35 @@ export default function JournalPage() {
     { key: "customQuestion", question: "Add Your Own Question", description: "Write any question or topic you want to include" },
   ];
 
-  // Load saved answers for this user
+  // ✅ LOAD SAVED ANSWERS (LOGIN OR STRIPE RETURN)
   useEffect(() => {
-    if (session?.user?.email) {
-      const saved = localStorage.getItem(`journalAnswers_${session.user.email}`);
-      if (saved) setAnswers(JSON.parse(saved));
+    const userEmail = session?.user?.email || emailFromQuery;
+    if (!userEmail) return;
+
+    const saved = localStorage.getItem(`journalAnswers_${userEmail}`);
+    if (saved) {
+      setAnswers(JSON.parse(saved));
     }
-  }, [session]);
+  }, [session, emailFromQuery]);
 
   const handleNext = () => {
-    if (session?.user?.email) {
-      localStorage.setItem(`journalAnswers_${session.user.email}`, JSON.stringify(answers));
+    const userEmail = session?.user?.email || emailFromQuery;
+    if (userEmail) {
+      localStorage.setItem(
+        `journalAnswers_${userEmail}`,
+        JSON.stringify(answers)
+      );
     }
-    setStep(step + 1);
+    setStep((prev) => prev + 1);
   };
 
-  // 🔑 Require login
+  // 🔐 REQUIRE LOGIN
   if (!session) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-pink-50 to-white dark:from-gray-900 dark:to-gray-800">
-        <p className="mb-4 text-gray-700 dark:text-gray-300">Please sign in to continue your journal.</p>
+        <p className="mb-4 text-gray-700 dark:text-gray-300">
+          Please sign in to continue your journal.
+        </p>
         <button
           onClick={() => signIn("google")}
           className="bg-pink-600 text-white px-6 py-3 rounded-full font-semibold hover:scale-105 transition"
@@ -53,7 +66,7 @@ export default function JournalPage() {
     );
   }
 
-  // 🔑 Journal completed
+  // ✅ FINISHED
   if (step >= steps.length) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-6 py-16 bg-gradient-to-b from-pink-50 to-white dark:from-gray-900 dark:to-gray-800 text-center">
@@ -62,7 +75,7 @@ export default function JournalPage() {
           You can download your journal or continue editing anytime.
         </p>
         <button
-          onClick={() => alert("Here you could trigger PDF download or print template")}
+          onClick={() => alert("PDF generation goes here")}
           className="bg-pink-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition"
         >
           Finish & Download 💖
@@ -84,10 +97,14 @@ export default function JournalPage() {
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-2xl md:text-3xl font-bold mb-2 text-gray-900 dark:text-gray-50">{current.question}</h1>
-            <p className="text-gray-700 dark:text-gray-300 mb-6">{current.description}</p>
+            <h1 className="text-2xl md:text-3xl font-bold mb-2">
+              {current.question}
+            </h1>
+            <p className="text-gray-700 dark:text-gray-300 mb-6">
+              {current.description}
+            </p>
             <textarea
-              className="w-full h-32 px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-300 dark:focus:ring-pink-600 resize-none mb-4"
+              className="w-full h-32 px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300 resize-none mb-4"
               value={answers[current.key] || ""}
               onChange={(e) =>
                 setAnswers({ ...answers, [current.key]: e.target.value })
@@ -96,7 +113,7 @@ export default function JournalPage() {
             <button
               onClick={handleNext}
               disabled={!answers[current.key]}
-              className="w-full bg-pink-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition transform disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-pink-600 text-white px-6 py-3 rounded-full font-semibold hover:scale-105 transition disabled:opacity-50"
             >
               {step === steps.length - 1 ? "Finish Journal 💖" : "Next →"}
             </button>
