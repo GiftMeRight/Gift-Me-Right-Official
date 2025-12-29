@@ -111,7 +111,8 @@ export default function QuizPage() {
           </p>
 
           <a
-            href="/create"
+            href="/create?from=quiz"
+
             className="inline-block mt-6 bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition hover:scale-105"
           >
             Create My Journal →
