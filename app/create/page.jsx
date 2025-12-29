@@ -2,38 +2,35 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSession, signIn } from "next-auth/react";
 
 export default function CreateJournalPage() {
+  const { data: session } = useSession();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState({});
   const [format, setFormat] = useState("digital"); // default format
 
+  // ✅ Require login
+  if (!session) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        <p className="mb-4 text-gray-700">Please sign in to continue creating your journal.</p>
+        <button
+          onClick={() => signIn("google")}
+          className="bg-pink-600 text-white px-6 py-3 rounded-full"
+        >
+          Sign in with Google
+        </button>
+      </div>
+    );
+  }
+
   const steps = [
-    {
-      key: "cover",
-      question: "Choose Your Cover",
-      options: ["Pink Heart", "Gold Foil", "Soft Pastel"],
-    },
-    {
-      key: "storyteller",
-      question: "Who will be telling the stories?",
-      options: ["Me", "Someone else"],
-    },
-    {
-      key: "recipient",
-      question: "Who is this for?",
-      options: ["Partner", "Family", "Friend"],
-    },
-    {
-      key: "giftMessage",
-      question: "Add a Gift Message",
-      options: [], // free text
-    },
-    {
-      key: "format",
-      question: "Choose your journal format",
-      options: ["Digital", "Printed"],
-    },
+    { key: "cover", question: "Choose Your Cover", options: ["Pink Heart", "Gold Foil", "Soft Pastel"] },
+    { key: "storyteller", question: "Who will be telling the stories?", options: ["Me", "Someone else"] },
+    { key: "recipient", question: "Who is this for?", options: ["Partner", "Family", "Friend"] },
+    { key: "giftMessage", question: "Add a Gift Message", options: [] }, // free text
+    { key: "format", question: "Choose your journal format", options: ["Digital", "Printed"] },
   ];
 
   const handleAnswer = (key, value) => {
