@@ -45,7 +45,7 @@ export default function CreateJournalPage() {
 
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState({});
-  const [loaded, setLoaded] = useState(true); // No need to wait for login
+  const [loaded, setLoaded] = useState(true); // no login required
 
   // Save answers in localStorage (optional)
   const handleAnswer = (key, value) => {
@@ -86,8 +86,8 @@ export default function CreateJournalPage() {
   if (!loaded) return null;
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-6 py-16 bg-gradient-to-b from-pink-50 to-white">
-      <div className="max-w-xl w-full bg-white rounded-3xl p-10 shadow-lg text-center">
+    <main className="min-h-screen flex items-center justify-center px-6 py-16 bg-gradient-to-b from-pink-50 to-white dark:from-gray-900 dark:to-gray-800">
+      <div className="max-w-xl w-full bg-white dark:bg-neutral-950 rounded-3xl p-10 shadow-lg text-center">
         <AnimatePresence mode="wait">
           {step < steps.length ? (
             <motion.div
@@ -96,7 +96,7 @@ export default function CreateJournalPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              <h1 className="text-2xl font-bold mb-6">
+              <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">
                 {steps[step].question}
               </h1>
 
@@ -106,7 +106,7 @@ export default function CreateJournalPage() {
                     <button
                       key={opt}
                       onClick={() => handleAnswer(steps[step].key, opt)}
-                      className="w-full px-6 py-3 rounded-xl bg-pink-100 hover:bg-pink-200"
+                      className="w-full px-6 py-3 rounded-xl bg-pink-100 hover:bg-pink-200 dark:bg-pink-800 dark:hover:bg-pink-700 dark:text-white text-gray-900 transition"
                     >
                       {opt}
                     </button>
@@ -115,7 +115,7 @@ export default function CreateJournalPage() {
               ) : (
                 <>
                   <textarea
-                    className="w-full h-32 p-4 border rounded-xl mb-4"
+                    className="w-full h-32 p-4 border rounded-xl mb-4 bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
                     placeholder="Type your message here..."
                     value={answers.giftMessage || ""}
                     onChange={(e) =>
@@ -129,7 +129,7 @@ export default function CreateJournalPage() {
                         answers.giftMessage || ""
                       )
                     }
-                    className="w-full bg-pink-600 text-white py-3 rounded-full"
+                    className="w-full bg-pink-600 text-white py-3 rounded-full hover:scale-105 transition"
                   >
                     Continue 💖
                   </button>
@@ -138,12 +138,12 @@ export default function CreateJournalPage() {
             </motion.div>
           ) : (
             <motion.div>
-              <h1 className="text-2xl font-bold mb-6">
+              <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">
                 You’re almost done 💖
               </h1>
               <button
                 onClick={handleCheckout}
-                className="w-full bg-pink-600 text-white py-3 rounded-full"
+                className="w-full bg-pink-600 text-white py-3 rounded-full hover:scale-105 transition"
               >
                 Proceed to Checkout
               </button>
