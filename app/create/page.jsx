@@ -2,11 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useSession, signIn } from "next-auth/react";
 
 export default function CreateJournalPage() {
-  const { data: session } = useSession();
-
   const steps = [
     {
       key: "cover",
@@ -48,66 +45,25 @@ export default function CreateJournalPage() {
 
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState({});
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(true); // No need to wait for login
 
-  // Require login
-  if (!session) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center">
-        <p className="mb-4 text-gray-700">
-          Please sign in to continue creating your journal.
-        </p>
-        <button
-          onClick={() => signIn("google")}
-          className="bg-pink-600 text-white px-6 py-3 rounded-full"
-        >
-          Sign in with Google
-        </button>
-      </div>
-    );
-  }
-
-  // Load saved progress (client-only)
-  useEffect(() => {
-    if (!session) return;
-
-    const email = session.user.email;
-    const savedAnswers = localStorage.getItem(`journalAnswers_${email}`);
-    const savedStep = localStorage.getItem(`journalStep_${email}`);
-
-    if (savedAnswers) setAnswers(JSON.parse(savedAnswers));
-    if (savedStep) setStep(Number(savedStep));
-
-    setLoaded(true);
-  }, [session]);
-
+  // Save answers in localStorage (optional)
   const handleAnswer = (key, value) => {
     const updated = { ...answers, [key]: value };
     setAnswers(updated);
-
-    localStorage.setItem(
-      `journalAnswers_${session.user.email}`,
-      JSON.stringify(updated)
-    );
+    localStorage.setItem("journalAnswers", JSON.stringify(updated));
 
     if (key === "format") {
-      localStorage.setItem(`journalFormat_${session.user.email}`, value);
+      localStorage.setItem("journalFormat", value);
     }
 
-    setStep((prev) => {
-      const next = prev + 1;
-      localStorage.setItem(`journalStep_${session.user.email}`, next);
-      return next;
-    });
+    setStep((prev) => prev + 1);
   };
 
   const saveAnswer = (key, value) => {
     const updated = { ...answers, [key]: value };
     setAnswers(updated);
-    localStorage.setItem(
-      `journalAnswers_${session.user.email}`,
-      JSON.stringify(updated)
-    );
+    localStorage.setItem("journalAnswers", JSON.stringify(updated));
   };
 
   const handleCheckout = async () => {
@@ -119,7 +75,6 @@ export default function CreateJournalPage() {
         metadata: {
           answers: JSON.stringify(answers),
           format: answers.format || "Digital",
-          email: session.user.email,
         },
       }),
     });
