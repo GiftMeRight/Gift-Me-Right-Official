@@ -1,4 +1,4 @@
-"use client";
+"use client"; // Keep client for hooks, SessionProvider, header interactions
 
 import Image from "next/image";
 import "./globals.css";
@@ -12,6 +12,7 @@ export default function RootLayout({ children }) {
       </head>
 
       <body className="bg-[#fffafc] dark:bg-neutral-950 text-gray-900 dark:text-gray-100 transition-colors duration-500">
+
         {/* HEADER */}
         <header className="max-w-7xl mx-auto px-6 py-4">
           <Image
