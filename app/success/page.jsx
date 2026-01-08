@@ -1,16 +1,27 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
 export default function SuccessPage() {
   const router = useRouter();
+  const [answers, setAnswers] = useState({});
+  const [format, setFormat] = useState("Digital");
+
+  useEffect(() => {
+    // Access localStorage only on the client
+    const savedAnswers = JSON.parse(
+      localStorage.getItem("journalAnswers") || "{}"
+    );
+    const savedFormat = localStorage.getItem("journalFormat") || "Digital";
+
+    setAnswers(savedAnswers);
+    setFormat(savedFormat);
+  }, []);
 
   const handleBegin = () => {
     router.push("/journal"); // Go to the journal page
   };
-
-  const answers = JSON.parse(localStorage.getItem("journalAnswers") || "{}");
-  const format = localStorage.getItem("journalFormat") || "Digital";
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-6 py-16 bg-gradient-to-b from-pink-50 to-white dark:from-gray-900 dark:to-gray-800 text-center">
