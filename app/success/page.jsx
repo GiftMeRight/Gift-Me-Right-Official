@@ -9,7 +9,6 @@ export default function SuccessPage() {
   const [format, setFormat] = useState("Digital");
 
   useEffect(() => {
-    // Access localStorage only on the client
     const savedAnswers = JSON.parse(localStorage.getItem("journalAnswers") || "{}");
     const savedFormat = localStorage.getItem("journalFormat") || "Digital";
 
@@ -18,7 +17,7 @@ export default function SuccessPage() {
   }, []);
 
   const handleBegin = () => {
-    router.push("/journal"); // Go to the journal page
+    router.push("/create-journal"); // Go to the journal page
   };
 
   return (
@@ -37,7 +36,7 @@ export default function SuccessPage() {
 
       {Object.keys(answers).length > 0 && (
         <div className="mt-6 text-left max-w-xl w-full">
-          <h2 className="text-xl font-semibold mb-2">Your saved answers:</h2>
+          <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Your saved answers:</h2>
           <ul className="list-disc pl-5 space-y-1 text-gray-700 dark:text-gray-300">
             {Object.entries(answers).map(([key, value]) => (
               <li key={key}>
