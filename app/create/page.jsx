@@ -26,19 +26,63 @@ export default function CreateJournalPage() {
     );
   }
 
-  const steps = [
-    { key: "cover", question: "Choose Your Cover", options: ["Pink Heart", "Gold Foil", "Soft Pastel"] },
-    { key: "storyteller", question: "Who will be telling the stories?", options: ["Me", "Someone else"] },
-    { key: "recipient", question: "Who is this for?", options: ["Partner", "Family", "Friend"] },
-    { key: "giftMessage", question: "Add a Gift Message", options: [] },
-    { key: "format", question: "Choose your journal format", options: ["Digital", "Printed"] },
+const steps = [
+    {
+      key: "cover",
+      question: "What frustrates you the most? Is it when they say:",
+      options: [
+        "I'm just a bad gift giver",
+        "You're hard to get gifts for",
+        "I just don't know you well enough",
+      ],
+    },
+    {
+      key: "storyteller",
+      question: "Who will be telling the stories?",
+      options: ["Me", "Someone else"],
+    },
+    {
+      key: "recipient",
+      question: "Who is this for?",
+      options: [
+        "Partner",
+        "Family",
+        "Friend",
+        "Gym Buddy",
+        "Myself",
+        "Boyfriend/Girlfriend",
+      ],
+    },
+    {
+      key: "giftMessage",
+      question: "Add a Gift Message",
+      options: [],
+    },
+    {
+      key: "format",
+      question: "Choose your journal format",
+      options: ["Digital", "Printed"],
+    },
   ];
 
-  // ✅ Load saved progress if it exists
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [format, setFormat] = useState("");
+  const [loaded, setLoaded] = useState(false);
+
+  // ✅ Load saved progress
   useEffect(() => {
-    const savedAnswers = localStorage.getItem(`journalAnswers_${session.user.email}`);
-    const savedStep = localStorage.getItem(`journalStep_${session.user.email}`);
-    const savedFormat = localStorage.getItem(`journalFormat_${session.user.email}`);
+    if (!session?.user?.email) return;
+
+    const savedAnswers = localStorage.getItem(
+      `journalAnswers_${session.user.email}`
+    );
+    const savedStep = localStorage.getItem(
+      `journalStep_${session.user.email}`
+    );
+    const savedFormat = localStorage.getItem(
+      `journalFormat_${session.user.email}`
+    );
 
     if (savedAnswers) setAnswers(JSON.parse(savedAnswers));
     if (savedStep) setStep(Number(savedStep));
@@ -47,46 +91,68 @@ export default function CreateJournalPage() {
     setLoaded(true);
   }, [session]);
 
+  // ✅ For button-based steps (auto-advance)
   const handleAnswer = (key, value) => {
     const updatedAnswers = { ...answers, [key]: value };
     setAnswers(updatedAnswers);
     setStep(step + 1);
 
-    // Save progress to localStorage per user
-    localStorage.setItem(`journalAnswers_${session.user.email}`, JSON.stringify(updatedAnswers));
-    localStorage.setItem(`journalStep_${session.user.email}`, step + 1);
-    if (key === "format") localStorage.setItem(`journalFormat_${session.user.email}`, value);
+    localStorage.setItem(
+      `journalAnswers_${session.user.email}`,
+      JSON.stringify(updatedAnswers)
+    );
+    localStorage.setItem(
+      `journalStep_${session.user.email}`,
+      step + 1
+    );
+
+    if (key === "format") {
+      setFormat(value);
+      localStorage.setItem(
+        `journalFormat_${session.user.email}`,
+        value
+      );
+    }
   };
 
-const handleCheckout = async () => {
-  // Save answers locally for success page
-  localStorage.setItem("journalAnswers", JSON.stringify(answers));
-  localStorage.setItem("journalFormat", format);
+  // ✅ For text input (DOES NOT advance)
+  const saveAnswer = (key, value) => {
+    const updatedAnswers = { ...answers, [key]: value };
+    setAnswers(updatedAnswers);
 
-  // Call Stripe API
-  const res = await fetch("/api/checkout", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      items: [{ name: "All About Me Journal", amount: 2900, quantity: 1 }],
-      metadata: {
-        answers: JSON.stringify(answers),
-        format,
-        email: session.user.email // <--- make sure you have session.user.email available
-      },
-    }),
-  });
+    localStorage.setItem(
+      `journalAnswers_${session.user.email}`,
+      JSON.stringify(updatedAnswers)
+    );
+  };
 
-  const data = await res.json();
-  if (data.url) {
-    window.location.href = data.url;
-  } else {
-    alert("Oops! Something went wrong. Please try again.");
-    console.error(data);
-  }
-};
+  const handleCheckout = async () => {
+    localStorage.setItem("journalAnswers", JSON.stringify(answers));
+    localStorage.setItem("journalFormat", format);
 
-  if (!loaded) return null; // wait until localStorage is loaded
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        items: [{ name: "All About Me Journal", amount: 2900, quantity: 1 }],
+        metadata: {
+          answers: JSON.stringify(answers),
+          format,
+          email: session.user.email,
+        },
+      }),
+    });
+
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert("Oops! Something went wrong. Please try again.");
+      console.error(data);
+    }
+  };
+
+  if (!loaded) return null;
 
   return (
     <main className="min-h-screen flex items-center justify-center px-6 py-16 bg-gradient-to-b from-pink-50 to-white dark:from-gray-900 dark:to-gray-800">
@@ -104,6 +170,7 @@ const handleCheckout = async () => {
                 {steps[step].question}
               </h1>
 
+              {/* BUTTON STEPS */}
               {steps[step].options.length > 0 ? (
                 <div className="space-y-4">
                   {steps[step].options.map((opt) => (
@@ -111,7 +178,7 @@ const handleCheckout = async () => {
                       key={opt}
                       onClick={() =>
                         steps[step].key === "format"
-                          ? (setFormat(opt), handleAnswer("format", opt))
+                          ? handleAnswer("format", opt)
                           : handleAnswer(steps[step].key, opt)
                       }
                       className="w-full px-6 py-3 rounded-xl bg-pink-50 dark:bg-pink-700 text-pink-900 dark:text-white hover:bg-pink-100 dark:hover:bg-pink-600 transition shadow-md"
@@ -121,19 +188,28 @@ const handleCheckout = async () => {
                   ))}
                 </div>
               ) : (
+                /* GIFT MESSAGE STEP */
                 <div className="space-y-4">
                   <textarea
                     placeholder="Write your message here"
                     value={answers.giftMessage || ""}
                     onChange={(e) =>
-                      handleAnswer("giftMessage", e.target.value)
+                      saveAnswer("giftMessage", e.target.value)
                     }
-                    className="w-full h-32 px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-300 dark:focus:ring-pink-600 resize-none mb-4"
+                    className="w-full h-32 px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-300 dark:focus:ring-pink-600 resize-none"
                   />
+
+                  <button
+                    onClick={() => setStep(step + 1)}
+                    className="w-full bg-pink-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition transform"
+                  >
+                    Continue 💖
+                  </button>
                 </div>
               )}
             </motion.div>
           ) : (
+            /* CHECKOUT */
             <motion.div
               key="checkout"
               initial={{ opacity: 0, y: 30 }}
