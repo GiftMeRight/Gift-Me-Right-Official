@@ -48,7 +48,6 @@ export default function CreateJournalPage() {
 
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState({});
-  const [format, setFormat] = useState("");
   const [loaded, setLoaded] = useState(false);
 
   // 🔐 Require login
@@ -70,14 +69,14 @@ export default function CreateJournalPage() {
 
   // Load saved progress
   useEffect(() => {
+    if (!session) return;
+
     const email = session.user.email;
     const savedAnswers = localStorage.getItem(`journalAnswers_${email}`);
     const savedStep = localStorage.getItem(`journalStep_${email}`);
-    const savedFormat = localStorage.getItem(`journalFormat_${email}`);
 
     if (savedAnswers) setAnswers(JSON.parse(savedAnswers));
     if (savedStep) setStep(Number(savedStep));
-    if (savedFormat) setFormat(savedFormat);
 
     setLoaded(true);
   }, [session]);
@@ -85,30 +84,28 @@ export default function CreateJournalPage() {
   const handleAnswer = (key, value) => {
     const updated = { ...answers, [key]: value };
     setAnswers(updated);
-    setStep((prev) => prev + 1);
 
+    // Save to localStorage immediately
     localStorage.setItem(
       `journalAnswers_${session.user.email}`,
       JSON.stringify(updated)
     );
-    localStorage.setItem(
-      `journalStep_${session.user.email}`,
-      step + 1
-    );
 
     if (key === "format") {
-      setFormat(value);
-      localStorage.setItem(
-        `journalFormat_${session.user.email}`,
-        value
-      );
+      localStorage.setItem(`journalFormat_${session.user.email}`, value);
     }
+
+    // Step increment
+    setStep((prev) => {
+      const next = prev + 1;
+      localStorage.setItem(`journalStep_${session.user.email}`, next);
+      return next;
+    });
   };
 
   const saveAnswer = (key, value) => {
     const updated = { ...answers, [key]: value };
     setAnswers(updated);
-
     localStorage.setItem(
       `journalAnswers_${session.user.email}`,
       JSON.stringify(updated)
@@ -123,7 +120,7 @@ export default function CreateJournalPage() {
         items: [{ name: "All About Me Journal", amount: 2900, quantity: 1 }],
         metadata: {
           answers: JSON.stringify(answers),
-          format,
+          format: answers.format || "Digital",
           email: session.user.email,
         },
       }),
@@ -155,9 +152,7 @@ export default function CreateJournalPage() {
                   {steps[step].options.map((opt) => (
                     <button
                       key={opt}
-                      onClick={() =>
-                        handleAnswer(steps[step].key, opt)
-                      }
+                      onClick={() => handleAnswer(steps[step].key, opt)}
                       className="w-full px-6 py-3 rounded-xl bg-pink-100 hover:bg-pink-200"
                     >
                       {opt}
@@ -168,13 +163,12 @@ export default function CreateJournalPage() {
                 <>
                   <textarea
                     className="w-full h-32 p-4 border rounded-xl mb-4"
+                    placeholder="Type your message here..."
                     value={answers.giftMessage || ""}
-                    onChange={(e) =>
-                      saveAnswer("giftMessage", e.target.value)
-                    }
+                    onChange={(e) => saveAnswer("giftMessage", e.target.value)}
                   />
                   <button
-                    onClick={() => setStep(step + 1)}
+                    onClick={() => handleAnswer("giftMessage", answers.giftMessage || "")}
                     className="w-full bg-pink-600 text-white py-3 rounded-full"
                   >
                     Continue 💖
