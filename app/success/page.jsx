@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function SuccessPage() {
   const router = useRouter();
@@ -10,9 +10,7 @@ export default function SuccessPage() {
 
   useEffect(() => {
     // Access localStorage only on the client
-    const savedAnswers = JSON.parse(
-      localStorage.getItem("journalAnswers") || "{}"
-    );
+    const savedAnswers = JSON.parse(localStorage.getItem("journalAnswers") || "{}");
     const savedFormat = localStorage.getItem("journalFormat") || "Digital";
 
     setAnswers(savedAnswers);
