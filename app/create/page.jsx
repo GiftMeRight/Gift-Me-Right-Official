@@ -6,27 +6,8 @@ import { useSession, signIn } from "next-auth/react";
 
 export default function CreateJournalPage() {
   const { data: session } = useSession();
-  const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState({});
-  const [format, setFormat] = useState("digital"); // default format
-  const [loaded, setLoaded] = useState(false); // ensure localStorage loads first
 
-  // ✅ Require login
-  if (!session) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center">
-        <p className="mb-4 text-gray-700">Please sign in to continue creating your journal.</p>
-        <button
-          onClick={() => signIn("google")}
-          className="bg-pink-600 text-white px-6 py-3 rounded-full"
-        >
-          Sign in with Google
-        </button>
-      </div>
-    );
-  }
-
-const steps = [
+  const steps = [
     {
       key: "cover",
       question: "What frustrates you the most? Is it when they say:",
@@ -70,19 +51,29 @@ const steps = [
   const [format, setFormat] = useState("");
   const [loaded, setLoaded] = useState(false);
 
-  // ✅ Load saved progress
-  useEffect(() => {
-    if (!session?.user?.email) return;
+  // 🔐 Require login
+  if (!session) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        <p className="mb-4 text-gray-700">
+          Please sign in to continue creating your journal.
+        </p>
+        <button
+          onClick={() => signIn("google")}
+          className="bg-pink-600 text-white px-6 py-3 rounded-full"
+        >
+          Sign in with Google
+        </button>
+      </div>
+    );
+  }
 
-    const savedAnswers = localStorage.getItem(
-      `journalAnswers_${session.user.email}`
-    );
-    const savedStep = localStorage.getItem(
-      `journalStep_${session.user.email}`
-    );
-    const savedFormat = localStorage.getItem(
-      `journalFormat_${session.user.email}`
-    );
+  // Load saved progress
+  useEffect(() => {
+    const email = session.user.email;
+    const savedAnswers = localStorage.getItem(`journalAnswers_${email}`);
+    const savedStep = localStorage.getItem(`journalStep_${email}`);
+    const savedFormat = localStorage.getItem(`journalFormat_${email}`);
 
     if (savedAnswers) setAnswers(JSON.parse(savedAnswers));
     if (savedStep) setStep(Number(savedStep));
@@ -91,15 +82,14 @@ const steps = [
     setLoaded(true);
   }, [session]);
 
-  // ✅ For button-based steps (auto-advance)
   const handleAnswer = (key, value) => {
-    const updatedAnswers = { ...answers, [key]: value };
-    setAnswers(updatedAnswers);
-    setStep(step + 1);
+    const updated = { ...answers, [key]: value };
+    setAnswers(updated);
+    setStep((prev) => prev + 1);
 
     localStorage.setItem(
       `journalAnswers_${session.user.email}`,
-      JSON.stringify(updatedAnswers)
+      JSON.stringify(updated)
     );
     localStorage.setItem(
       `journalStep_${session.user.email}`,
@@ -115,21 +105,17 @@ const steps = [
     }
   };
 
-  // ✅ For text input (DOES NOT advance)
   const saveAnswer = (key, value) => {
-    const updatedAnswers = { ...answers, [key]: value };
-    setAnswers(updatedAnswers);
+    const updated = { ...answers, [key]: value };
+    setAnswers(updated);
 
     localStorage.setItem(
       `journalAnswers_${session.user.email}`,
-      JSON.stringify(updatedAnswers)
+      JSON.stringify(updated)
     );
   };
 
   const handleCheckout = async () => {
-    localStorage.setItem("journalAnswers", JSON.stringify(answers));
-    localStorage.setItem("journalFormat", format);
-
     const res = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -144,90 +130,68 @@ const steps = [
     });
 
     const data = await res.json();
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      alert("Oops! Something went wrong. Please try again.");
-      console.error(data);
-    }
+    if (data.url) window.location.href = data.url;
   };
 
   if (!loaded) return null;
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-6 py-16 bg-gradient-to-b from-pink-50 to-white dark:from-gray-900 dark:to-gray-800">
-      <div className="relative max-w-xl w-full bg-white/90 dark:bg-gray-900/80 backdrop-blur rounded-3xl p-10 shadow-lg text-center">
+    <main className="min-h-screen flex items-center justify-center px-6 py-16 bg-gradient-to-b from-pink-50 to-white">
+      <div className="max-w-xl w-full bg-white rounded-3xl p-10 shadow-lg text-center">
         <AnimatePresence mode="wait">
           {step < steps.length ? (
             <motion.div
               key={steps[step].key}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.6 }}
+              exit={{ opacity: 0, y: -20 }}
             >
-              <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-50 mb-6">
+              <h1 className="text-2xl font-bold mb-6">
                 {steps[step].question}
               </h1>
 
-              {/* BUTTON STEPS */}
               {steps[step].options.length > 0 ? (
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {steps[step].options.map((opt) => (
                     <button
                       key={opt}
                       onClick={() =>
-                        steps[step].key === "format"
-                          ? handleAnswer("format", opt)
-                          : handleAnswer(steps[step].key, opt)
+                        handleAnswer(steps[step].key, opt)
                       }
-                      className="w-full px-6 py-3 rounded-xl bg-pink-50 dark:bg-pink-700 text-pink-900 dark:text-white hover:bg-pink-100 dark:hover:bg-pink-600 transition shadow-md"
+                      className="w-full px-6 py-3 rounded-xl bg-pink-100 hover:bg-pink-200"
                     >
                       {opt}
                     </button>
                   ))}
                 </div>
               ) : (
-                /* GIFT MESSAGE STEP */
-                <div className="space-y-4">
+                <>
                   <textarea
-                    placeholder="Write your message here"
+                    className="w-full h-32 p-4 border rounded-xl mb-4"
                     value={answers.giftMessage || ""}
                     onChange={(e) =>
                       saveAnswer("giftMessage", e.target.value)
                     }
-                    className="w-full h-32 px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-300 dark:focus:ring-pink-600 resize-none"
                   />
-
                   <button
                     onClick={() => setStep(step + 1)}
-                    className="w-full bg-pink-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition transform"
+                    className="w-full bg-pink-600 text-white py-3 rounded-full"
                   >
                     Continue 💖
                   </button>
-                </div>
+                </>
               )}
             </motion.div>
           ) : (
-            /* CHECKOUT */
-            <motion.div
-              key="checkout"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-50 mb-6">
-                You’re almost done! 💖
+            <motion.div>
+              <h1 className="text-2xl font-bold mb-6">
+                You’re almost done 💖
               </h1>
               <button
                 onClick={handleCheckout}
-                className="w-full bg-pink-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition transform"
+                className="w-full bg-pink-600 text-white py-3 rounded-full"
               >
-                Proceed to Checkout 💌
-                <span className="block text-sm mt-1 opacity-80">
-                  You’re almost done 💖
-                </span>
+                Proceed to Checkout
               </button>
             </motion.div>
           )}
