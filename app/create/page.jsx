@@ -50,7 +50,7 @@ export default function CreateJournalPage() {
   const [answers, setAnswers] = useState({});
   const [loaded, setLoaded] = useState(false);
 
-  // 🔐 Require login
+  // Require login
   if (!session) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center">
@@ -67,7 +67,7 @@ export default function CreateJournalPage() {
     );
   }
 
-  // Load saved progress
+  // Load saved progress (client-only)
   useEffect(() => {
     if (!session) return;
 
@@ -85,7 +85,6 @@ export default function CreateJournalPage() {
     const updated = { ...answers, [key]: value };
     setAnswers(updated);
 
-    // Save to localStorage immediately
     localStorage.setItem(
       `journalAnswers_${session.user.email}`,
       JSON.stringify(updated)
@@ -95,7 +94,6 @@ export default function CreateJournalPage() {
       localStorage.setItem(`journalFormat_${session.user.email}`, value);
     }
 
-    // Step increment
     setStep((prev) => {
       const next = prev + 1;
       localStorage.setItem(`journalStep_${session.user.email}`, next);
@@ -165,10 +163,17 @@ export default function CreateJournalPage() {
                     className="w-full h-32 p-4 border rounded-xl mb-4"
                     placeholder="Type your message here..."
                     value={answers.giftMessage || ""}
-                    onChange={(e) => saveAnswer("giftMessage", e.target.value)}
+                    onChange={(e) =>
+                      saveAnswer("giftMessage", e.target.value)
+                    }
                   />
                   <button
-                    onClick={() => handleAnswer("giftMessage", answers.giftMessage || "")}
+                    onClick={() =>
+                      handleAnswer(
+                        "giftMessage",
+                        answers.giftMessage || ""
+                      )
+                    }
                     className="w-full bg-pink-600 text-white py-3 rounded-full"
                   >
                     Continue 💖
