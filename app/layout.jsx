@@ -1,3 +1,5 @@
+"use client"; // Keep this
+
 import Image from "next/image";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
