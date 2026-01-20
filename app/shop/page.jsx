@@ -44,7 +44,7 @@ export default function ShopPage() {
           Buy the Blueprint
         </a>
 
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
+        <p className="text-gray-700 dark:text-gray-300 mb-4">
           After purchase, you’ll receive a private personalization questionnaire.
         </p>
       </SectionGlow>
