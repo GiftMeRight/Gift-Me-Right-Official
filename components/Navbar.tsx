@@ -8,7 +8,7 @@ export default function Navbar() {
       <Link href="/" className="text-xl font-semibold">
         Gift Me Right™
       </Link>
-
+      
       <div className="flex gap-6 text-sm font-medium">
         <Link href="/shop" className="hover:text-pink-600">
           Shop
