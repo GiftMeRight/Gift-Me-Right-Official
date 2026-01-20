@@ -59,7 +59,7 @@ export default function HomePage() {
 
           {/* Subtitle */}
           <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mt-4">
-  Gift Me Right helps you give a gift that actually lands.
+  A platform that helps you give a gift that actually lands.
   No guessing. No stress. Just a clear, personalized plan
   based on who they truly are.
           </p>
