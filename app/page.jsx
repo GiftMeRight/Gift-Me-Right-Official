@@ -99,8 +99,18 @@ export default function HomePage() {
     How It Works
   </a>
 </div>
-          
-          {/* PRIMARY + SECONDARY CTA */}
+        
+          {/* Hero image */}
+          <div className="relative w-full max-w-3xl h-64 md:h-96 rounded-3xl overflow-hidden shadow-lg mt-10">
+            <Image
+              src="/images/hero-gift.jpg"
+              alt="Beautiful gift wrapping"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+                    {/* PRIMARY + SECONDARY CTA */}
           <div className="mt-8 flex flex-col items-center gap-4">
             {/* Primary: Direct Builder */}
             <a
@@ -120,17 +130,6 @@ export default function HomePage() {
                 Takes ~2 minutes
               </span>
             </a>
-          </div>
-
-          {/* Hero image */}
-          <div className="relative w-full max-w-3xl h-64 md:h-96 rounded-3xl overflow-hidden shadow-lg mt-10">
-            <Image
-              src="/images/hero-gift.jpg"
-              alt="Beautiful gift wrapping"
-              fill
-              className="object-cover"
-              priority
-            />
           </div>
         </div>
       </SectionGlow>
