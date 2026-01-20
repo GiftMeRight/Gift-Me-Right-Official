@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 
 export default function HowItWorksPage() {
   return (
-    <main className="min-h-screen px-6 py-16 max-w-4xl mx-auto">
-      <h1 className="text-4xl font-bold mb-10">
+    <main className="bg-red-600 min-h-screen">
+      <h1 className="text-white text-4xl p-8">
         How Gift Me Right Works
       </h1>
 
