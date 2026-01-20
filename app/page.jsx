@@ -59,8 +59,9 @@ export default function HomePage() {
 
           {/* Subtitle */}
           <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mt-4">
-            The “All About Me” journal that helps people love you better —
-            without guessing.
+  Gift Me Right helps you give a gift that actually lands.
+  No guessing. No stress. Just a clear, personalized plan
+  based on who they truly are.
           </p>
 
           {/* Floating hearts BELOW subtitle */}
@@ -82,6 +83,23 @@ export default function HomePage() {
             ))}
           </div>
 
+
+<div className="mt-8 flex justify-center gap-4">
+  <a
+    href="/shop"
+    className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
+  >
+    Get My Gift Blueprint
+  </a>
+
+  <a
+    href="/how-it-works"
+    className="border px-6 py-3 rounded-lg font-semibold hover:bg-gray-50"
+  >
+    How It Works
+  </a>
+</div>
+          
           {/* PRIMARY + SECONDARY CTA */}
           <div className="mt-8 flex flex-col items-center gap-4">
             {/* Primary: Direct Builder */}
