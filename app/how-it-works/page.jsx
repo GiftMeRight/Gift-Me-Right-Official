@@ -1,6 +1,6 @@
 "use client";
 
-import SectionGlow from "../components/SectionGlow";
+import SectionGlow from "../../components/SectionGlow";
 
 export default function HowItWorksPage() {
   return (
