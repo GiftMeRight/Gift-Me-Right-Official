@@ -44,7 +44,8 @@ export default function HowItWorksPage() {
 
           <div className="border border-pink-400 rounded-xl p-6 bg-pink-50">
             <h3 className="text-xl font-semibold text-pink-700 mb-2">
-              Personalized Gift Match (Done-For-You)
+              Personalized Gift Match 
+              (Done-For-You)
             </h3>
             <p className="text-gray-700">
               You answer the same questions — but we analyze everything and
