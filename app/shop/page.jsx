@@ -18,7 +18,7 @@ export default function ShopPage() {
     <main className="px-6 py-16 max-w-5xl mx-auto">
 
       <SectionGlow>
-        <h1 className="text-4xl font-bold text-center mb-4">
+        <h1 className="text-4xl font-bold text-gray-center mb-4">
           Shop Gift Me Right™
         </h1>
         <p className="text-center text-gray-700 text-lg">
