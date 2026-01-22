@@ -42,7 +42,7 @@ export default function ThankYouPage() {
             recommendation by email
           </li>
           <li>
-            Standard delivery is within 24–48 hours
+            Standard delivery is within 2 to 3 business days
           </li>
         </ul>
       </SectionGlow>
