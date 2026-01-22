@@ -2,10 +2,12 @@
 
 import React from "react";
 
-/* SECTION GLOW */
-function SectionGlow({ children }) {
+/* ---------------- SECTION GLOW ---------------- */
+function SectionGlow({ children, className = "" }) {
   return (
-    <section className="animate-fadeIn relative bg-white/80 backdrop-blur rounded-3xl p-10 shadow-sm overflow-hidden my-12">
+    <section
+      className={`animate-fadeIn relative bg-white/80 backdrop-blur rounded-3xl p-10 shadow-sm overflow-hidden my-12 ${className}`}
+    >
       <div className="absolute inset-0 bg-gradient-to-tr from-pink-200 via-pink-100 to-white/0 opacity-40 -z-10 rounded-3xl" />
       <div className="absolute inset-0 bg-glow -z-20 rounded-3xl" />
       {children}
@@ -13,10 +15,29 @@ function SectionGlow({ children }) {
   );
 }
 
+/* ---------------- STRIPE CHECKOUT ---------------- */
+async function checkout(priceId) {
+  const res = await fetch("/api/checkout", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ priceId }),
+  });
+
+  const data = await res.json();
+
+  if (data.url) {
+    window.location.href = data.url;
+  } else {
+    alert("Something went wrong. Please try again.");
+  }
+}
+
+/* ---------------- SHOP PAGE ---------------- */
 export default function ShopPage() {
   return (
     <main className="px-6 py-16 max-w-5xl mx-auto">
 
+      {/* HEADER */}
       <SectionGlow>
         <h1 className="text-4xl font-bold text-center text-gray-900 mb-4">
           Shop Gift Me Right™
@@ -26,6 +47,7 @@ export default function ShopPage() {
         </p>
       </SectionGlow>
 
+      {/* DIY PRODUCT */}
       <SectionGlow>
         <h2 className="text-2xl font-semibold text-pink-600 mb-2">
           DIY Gift Blueprint
@@ -44,18 +66,21 @@ export default function ShopPage() {
         </ul>
 
         <p className="font-semibold text-gray-900 mb-4">
-          $19 — One-time purchase
+          $29.99 — One-time purchase
         </p>
 
-        <a
-          href="#"
-          className="inline-block bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
+        <button
+          onClick={() =>
+            checkout(process.env.NEXT_PUBLIC_DIY_PRICE_ID)
+          }
+          className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
         >
           Get the DIY Blueprint
-        </a>
+        </button>
       </SectionGlow>
 
-      <SectionGlow className="border border-pink-400">
+      {/* DONE-FOR-YOU PRODUCT */}
+      <SectionGlow className="border border-pink-300">
         <h2 className="text-2xl font-semibold text-pink-700 mb-2">
           Personalized Gift Match (Done-For-You)
         </h2>
@@ -73,15 +98,17 @@ export default function ShopPage() {
         </ul>
 
         <p className="font-semibold text-gray-900 mb-4">
-          $69 — Done for you
+          $69.99 — Done for you
         </p>
 
-        <a
-          href="#"
-          className="inline-block bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
+        <button
+          onClick={() =>
+            checkout(process.env.NEXT_PUBLIC_DONE_FOR_YOU_PRICE_ID)
+          }
+          className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
         >
           Upgrade to Personalized Match
-        </a>
+        </button>
       </SectionGlow>
 
     </main>
