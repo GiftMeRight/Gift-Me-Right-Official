@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import React from "react";
 
 /* ---------------- SECTION GLOW ---------------- */
 function SectionGlow({ children, className = "" }) {
@@ -15,84 +15,83 @@ function SectionGlow({ children, className = "" }) {
   );
 }
 
-/* ---------------- SUCCESS PAGE ---------------- */
 export default function SuccessPage() {
-  const searchParams = useSearchParams();
-  const sessionId = searchParams.get("session_id");
-
   return (
-    <main className="px-6 py-16 max-w-5xl mx-auto">
+    <main className="px-6 py-16 max-w-4xl mx-auto">
 
-      {/* HEADER */}
+      {/* CONFIRMATION */}
       <SectionGlow>
         <h1 className="text-4xl font-bold text-center text-gray-900 mb-4">
-          You’re All Set ✨
+          You’re In 🎉
         </h1>
-        <p className="text-center text-gray-700 text-lg max-w-2xl mx-auto">
-          This is the moment where gifting stops feeling stressful
-          and starts feeling intentional.
+        <p className="text-center text-gray-700 text-lg">
+          Your purchase was successful. You’re officially done guessing.
         </p>
       </SectionGlow>
 
-      {/* DIY SECTION */}
+      {/* NEXT STEP */}
       <SectionGlow>
-        <h2 className="text-2xl font-semibold text-pink-600 mb-2">
-          Your DIY Gift Blueprint
+        <h2 className="text-2xl font-semibold text-pink-600 mb-4">
+          Your Next Step
         </h2>
 
-        <p className="text-gray-700 mb-4">
-          Use this as a framework to turn thoughtful answers into confident,
-          meaningful gift decisions — without second-guessing yourself.
-        </p>
-
         <p className="text-gray-700 mb-6">
-          Some people enjoy walking through the process on their own.
-          Others later decide they’d rather skip the mental load entirely.
-          Either way, this gives you clarity.
+          Click below to fill out the gifting questionnaire. This helps clarify
+          what actually matters — whether you’re using the DIY Blueprint or
+          receiving a personalized gift match.
         </p>
 
         <a
-          href="/downloads/diy-blueprint.pdf"
-          className="inline-block text-pink-600 font-semibold underline"
+          href="https://forms.gle/nLLKi7omcpcKvPrv5"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block bg-pink-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-pink-700 transition"
         >
-          Download Your Blueprint
+          Start the Questionnaire →
         </a>
-      </SectionGlow>
 
-      {/* DONE-FOR-YOU SECTION */}
-      <SectionGlow className="border border-pink-200">
-        <h2 className="text-2xl font-semibold text-pink-700 mb-2">
-          Personalized Gift Match
-        </h2>
-
-        <p className="text-gray-700 mb-4">
-          If you chose a personalized gift match, the next step is the questionnaire.
-          This helps uncover what actually matters to the person you’re gifting —
-          not just what they like, but why it resonates.
-        </p>
-
-        <p className="text-gray-700">
-          Once submitted, your responses are reviewed and translated into
-          a clear, intentional recommendation. Most matches are delivered
-          within <strong>24–48 hours</strong>.
+        <p className="text-sm text-gray-600 mt-4">
+          Takes about 5–7 minutes. Thoughtful answers = better results.
         </p>
       </SectionGlow>
 
-      {/* SOFT UPSELL / REASSURANCE */}
-      <SectionGlow className="bg-pink-50">
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-          A gentle reminder 💗
+      {/* WHAT HAPPENS NEXT */}
+      <SectionGlow>
+        <h3 className="text-xl font-semibold text-gray-900 mb-3">
+          What Happens Next?
         </h3>
 
-        <p className="text-gray-700">
-          Many people start with the DIY blueprint and later decide they
-          want a second set of eyes — especially for meaningful moments
-          or high-pressure gifts.
+        <ul className="list-disc pl-5 text-gray-700 space-y-2">
+          <li>
+            <strong>DIY Blueprint:</strong> Use your answers to confidently choose
+            a meaningful gift.
+          </li>
+          <li>
+            <strong>Personalized Gift Match:</strong> We analyze your responses
+            and send you a clear recommendation with reasoning.
+          </li>
+        </ul>
+      </SectionGlow>
+
+      {/* COMMUNITY / SOFT ENGAGEMENT */}
+      <SectionGlow className="border border-pink-300">
+        <h3 className="text-xl font-semibold text-pink-700 mb-3">
+          Want More Thoughtful Gifting Ideas?
+        </h3>
+
+        <p className="text-gray-700 mb-4">
+          Gift Me Right™ is growing into a space for intentional gifting,
+          emotional intelligence, and never feeling unsure again.
         </p>
 
-        <p className="text-gray-700 mt-3">
-          If that ever feels right, upgrading is always an option.
-          For now, you’re exactly where you need to be.
+        <ul className="list-disc pl-5 text-gray-700 mb-6">
+          <li>Upcoming mini-guides & gift prompts</li>
+          <li>Seasonal gifting ideas</li>
+          <li>Community insights & real examples</li>
+        </ul>
+
+        <p className="text-gray-700 font-medium">
+          More coming soon 💗
         </p>
       </SectionGlow>
 
