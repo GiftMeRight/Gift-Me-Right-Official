@@ -81,8 +81,14 @@ export default function ShopPage() {
 
       {/* DONE-FOR-YOU PRODUCT */}
       <SectionGlow className="border border-pink-300">
+
+        {/* MOST POPULAR BADGE */}
+        <div className="inline-block mb-3 px-3 py-1 text-xs font-semibold text-pink-700 bg-pink-100 rounded-full">
+          Most Popular
+        </div>
+
         <h2 className="text-2xl font-semibold text-pink-700 mb-2">
-          Personalized Gift Match (Done-For-You)
+          🎁 Personalized Gift Match — Limited Spots
         </h2>
 
         <p className="text-gray-700 mb-4">
@@ -97,8 +103,13 @@ export default function ShopPage() {
           <li>Delivered as a polished PDF or email</li>
         </ul>
 
-        <p className="font-semibold text-gray-900 mb-4">
+        <p className="font-semibold text-gray-900">
           $69.99 — Done for you
+        </p>
+
+        {/* EXCLUSIVITY LINE */}
+        <p className="text-sm text-pink-700 mt-2 mb-4">
+          Limited availability · Hand-reviewed for quality
         </p>
 
         <button
