@@ -1,51 +1,48 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function SuccessPage() {
-  const router = useRouter();
-  const [answers, setAnswers] = useState({});
-  const [format, setFormat] = useState("Digital");
-
-  useEffect(() => {
-    const savedAnswers = JSON.parse(localStorage.getItem("journalAnswers") || "{}");
-    const savedFormat = localStorage.getItem("journalFormat") || "Digital";
-
-    setAnswers(savedAnswers);
-    setFormat(savedFormat);
-  }, []);
-
-  const handleBegin = () => {
-    router.push("/create-journal"); // Go to the journal page
-  };
+  const searchParams = useSearchParams();
+  const sessionId = searchParams.get("session_id");
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-6 py-16 bg-gradient-to-b from-pink-50 to-white dark:from-gray-900 dark:to-gray-800 text-center">
-      <h1 className="text-3xl font-bold mb-4">🎉 Thank you for your order!</h1>
-      <p className="text-gray-700 dark:text-gray-300 mb-6">
-        Your {format} “All About Me” journal is ready. You can now start creating your journal.
+    <main className="max-w-3xl mx-auto px-6 py-16 text-center">
+      <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        You’re In 🎉
+      </h1>
+
+      <p className="text-gray-700 mb-8">
+        Your payment was successful. Here’s what happens next:
       </p>
 
-      <button
-        onClick={handleBegin}
-        className="bg-pink-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition"
-      >
-        Begin Creating 💖
-      </button>
-
-      {Object.keys(answers).length > 0 && (
-        <div className="mt-6 text-left max-w-xl w-full">
-          <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Your saved answers:</h2>
-          <ul className="list-disc pl-5 space-y-1 text-gray-700 dark:text-gray-300">
-            {Object.entries(answers).map(([key, value]) => (
-              <li key={key}>
-                <strong>{key}:</strong> {value}
-              </li>
-            ))}
-          </ul>
+      <div className="space-y-6 text-left">
+        <div className="border rounded-xl p-6">
+          <h2 className="font-semibold text-pink-600">
+            DIY Blueprint
+          </h2>
+          <p className="text-gray-700">
+            Download your blueprint and start gifting with confidence.
+          </p>
+          <a
+            href="/downloads/diy-blueprint.pdf"
+            className="text-pink-600 underline"
+          >
+            Download Your Blueprint
+          </a>
         </div>
-      )}
+
+        <div className="border rounded-xl p-6">
+          <h2 className="font-semibold text-pink-600">
+            Personalized Gift Match
+          </h2>
+          <p className="text-gray-700">
+            You’ll be prompted to fill out your questionnaire next.
+            Your personalized gift recommendation will be delivered
+            within 24–48 hours.
+          </p>
+        </div>
+      </div>
     </main>
   );
 }
