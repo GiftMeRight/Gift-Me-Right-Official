@@ -134,6 +134,42 @@ export default function HomePage() {
         </div>
       </SectionGlow>
 
+      {/* Coupons, slideshow, games section */}
+      <SectionGlow>
+  <h2 className="text-3xl font-semibold text-center text-gray-900 mb-10">
+    How Gift Me Right Helps
+  </h2>
+
+  <div className="grid md:grid-cols-3 gap-10 text-center">
+    <div>
+      <h3 className="text-xl font-semibold text-pink-600 mb-2">
+        Thoughtful Coupons
+      </h3>
+      <p className="text-gray-700">
+        Small gestures designed to feel meaningful — not forced.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="text-xl font-semibold text-pink-600 mb-2">
+        Connection Games
+      </h3>
+      <p className="text-gray-700">
+        Conversation starters that bring people closer, naturally.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="text-xl font-semibold text-pink-600 mb-2">
+        Emotional Slideshows
+      </h3>
+      <p className="text-gray-700">
+        A simple way to say what’s hard to put into words.
+      </p>
+    </div>
+  </div>
+</SectionGlow>
+
       {/* PROBLEM */}
       <SectionGlow>
         <h2 className="text-3xl font-semibold text-center text-gray-900 dark:text-gray-50">
