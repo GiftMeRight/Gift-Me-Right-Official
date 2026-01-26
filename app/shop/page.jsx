@@ -184,15 +184,14 @@ export default function ShopPage() {
 
         <p className="text-gray-700 mb-6">
           When you know how you feel — but don’t know how to say it — these
-          slideshows help you express appreciation, love, and gratitude in a
+          slideshows help you learn how about love, and expressing appreciation and gratitude in a
           calm, sincere way.
         </p>
 
         <ul className="list-disc pl-5 text-gray-700 mb-6">
-          <li>Guided prompts to help you express yourself</li>
+          <li>Explains the mysteries around love and gift-giiving</li>
           <li>Clean, modern design</li>
-          <li>Easy to personalize</li>
-          <li>Share digitally or print</li>
+          <li>Easy to understand</li>
         </ul>
 
         <p className="font-semibold text-gray-900 mb-4">
