@@ -15,64 +15,67 @@ function SectionGlow({ children, className = "" }) {
   );
 }
 
-/* ---------------- PAGE ---------------- */
+/* ---------------- STRIPE CHECKOUT ---------------- */
+async function checkout(priceId) {
+  const res = await fetch("/api/checkout", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ priceId }),
+  });
+
+  const data = await res.json();
+
+  if (data.url) {
+    window.location.href = data.url;
+  } else {
+    alert("Something went wrong. Please try again.");
+  }
+}
+
+/* ---------------- GAMES PAGE ---------------- */
 export default function GamesPage() {
   return (
     <main className="soft-glow min-h-screen px-6 py-16 max-w-5xl mx-auto">
+
       <SectionGlow>
-        <h1 className="text-4xl font-bold text-pink-600 mb-4">
+        <h1 className="text-4xl font-bold text-pink-600 mb-4 text-center">
           Conversation & Connection Games
         </h1>
-
-        <p className="text-gray-700 mb-6">
-          Not every meaningful moment needs a big gift. Sometimes it’s just the
-          right question at the right time.
-        </p>
-
-        <ul className="list-disc pl-5 text-gray-700 mb-6">
-          <li>Thoughtful, natural conversation prompts</li>
-          <li>Balanced between fun and meaningful</li>
-          <li>Perfect for couples, families, or quiet nights</li>
-          <li>No forced vulnerability</li>
-        </ul>
-
-        <p className="font-semibold text-gray-900 mb-4">
-          Connection — without the pressure to say the perfect thing
+        <p className="text-gray-700 mb-6 text-center">
+          Thoughtful prompts for fun and meaningful conversations with family or your partner.
         </p>
       </SectionGlow>
 
+      {/* Teen Couples Game */}
       <SectionGlow>
         <h2 className="text-2xl font-semibold text-gray-900 mb-2">
           Teen Couple Quiz: The Flirt & Fun Challenge
         </h2>
-
         <p className="text-gray-700 mb-4">
-          5 questions per page, 20 pages total — playful and engaging for teen couples.
+          20 pages • 5 questions per page • Lighthearted fun for teen couples
         </p>
-
-        <p className="font-semibold text-gray-900 mb-4">
-          $9.99 • Instant download
-        </p>
-
-        <button className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700">
-          Buy Teen Couple Quiz
+        <p className="font-semibold text-gray-900 mb-4">$9.99 • Instant download</p>
+        <button
+          onClick={() => checkout("price_1StvlVAAECronuKAQrzxDMem")}
+          className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
+        >
+          Buy Teen Game
         </button>
       </SectionGlow>
 
+      {/* Family Game */}
       <SectionGlow>
         <h2 className="text-2xl font-semibold text-gray-900 mb-2">
           Family Brainstorm Game: Connect & Laugh Pack
         </h2>
-
         <p className="text-gray-700 mb-4">
-          5 questions per page, 19 pages total — fun and meaningful family bonding.
+          19 pages • 5 questions per page • Fun and meaningful questions for family bonding
         </p>
-
-        <p className="font-semibold text-gray-900 mb-4">
-          $9.99 • Instant download
-        </p>
-
-        <button className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700">
+        <p className="font-semibold text-gray-900 mb-4">$9.99 • Instant download</p>
+        <button
+          onClick={() => checkout("price_1StvmPAAECronuKABuovXtyZ")}
+          className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
+        >
           Buy Family Game
         </button>
       </SectionGlow>
