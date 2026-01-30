@@ -1,15 +1,15 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 
 /* ---------------- SECTION GLOW ---------------- */
 function SectionGlow({ children, className = "" }) {
   return (
     <section
-      className={`animate-fadeIn relative bg-white/80 backdrop-blur rounded-3xl p-10 shadow-sm overflow-hidden my-12 ${className}`}
+      className={`relative bg-white/80 backdrop-blur rounded-3xl p-10 shadow-sm overflow-hidden my-12 ${className}`}
     >
       <div className="absolute inset-0 bg-gradient-to-tr from-pink-200 via-pink-100 to-white/0 opacity-40 -z-10 rounded-3xl" />
-      <div className="absolute inset-0 bg-glow -z-20 rounded-3xl" />
       {children}
     </section>
   );
@@ -25,7 +25,7 @@ async function checkout(priceId) {
 
   const data = await res.json();
 
-  if (data.url) {
+  if (data?.url) {
     window.location.href = data.url;
   } else {
     alert("Something went wrong. Please try again.");
@@ -43,7 +43,7 @@ export default function ShopPage() {
           Shop Gift Me Right™
         </h1>
         <p className="text-center text-gray-700 text-lg">
-          Two ways to stop guessing and start gifting with intention.
+          Stop guessing and start gifting with intention.
         </p>
       </SectionGlow>
 
@@ -54,8 +54,7 @@ export default function ShopPage() {
         </h2>
 
         <p className="text-gray-700 mb-4">
-          A self-guided framework for people who want clarity without
-          overthinking.
+          A self-guided framework for people who want clarity without overthinking.
         </p>
 
         <ul className="list-disc pl-5 text-gray-700 mb-4">
@@ -70,9 +69,7 @@ export default function ShopPage() {
         </p>
 
         <button
-          onClick={() =>
-            checkout(process.env.NEXT_PUBLIC_DIY_PRICE_ID)
-          }
+          onClick={() => checkout(process.env.NEXT_PUBLIC_DIY_PRICE_ID)}
           className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
         >
           Get the DIY Blueprint
@@ -81,132 +78,88 @@ export default function ShopPage() {
 
       {/* DONE-FOR-YOU PRODUCT */}
       <SectionGlow className="border border-pink-300">
-
-        {/* MOST POPULAR BADGE */}
         <div className="inline-block mb-3 px-3 py-1 text-xs font-semibold text-pink-700 bg-pink-100 rounded-full">
           Most Popular
         </div>
 
         <h2 className="text-2xl font-semibold text-pink-700 mb-2">
-          🎁 Personalized Gift Match — Limited Spots
+          🎁 Personalized Gift Match
         </h2>
 
         <p className="text-gray-700 mb-4">
-          For moments that matter most. We analyze your answers and tell
-          you exactly what to buy — and why it works.
+          We analyze your answers and tell you exactly what to buy — and why it works.
         </p>
 
         <ul className="list-disc pl-5 text-gray-700 mb-4">
           <li>We analyze the questionnaire for you</li>
           <li>Personalized gift recommendation</li>
           <li>Emotional reasoning behind the choice</li>
-          <li>Delivered as a polished PDF or email</li>
+          <li>Delivered digitally</li>
         </ul>
 
-        <p className="font-semibold text-gray-900">
+        <p className="font-semibold text-gray-900 mb-4">
           $69.99 — Done for you
         </p>
 
-        {/* EXCLUSIVITY LINE */}
-        <p className="text-sm text-pink-700 mt-2 mb-4">
-          Limited availability · Hand-reviewed for quality
-        </p>
-
         <button
-          onClick={() =>
-            checkout(process.env.NEXT_PUBLIC_DONE_FOR_YOU_PRICE_ID)
-          }
+          onClick={() => checkout(process.env.NEXT_PUBLIC_DONE_FOR_YOU_PRICE_ID)}
           className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
         >
           Upgrade to Personalized Match
         </button>
       </SectionGlow>
-     {/* COUPONS */}
-<SectionGlow>
-  <h2 className="text-3xl font-semibold text-pink-600 mb-2">
-    Thoughtful Coupons
-  </h2>
 
-  <p className="text-gray-700 mb-6">
-    Small gestures can feel incredibly meaningful — when they’re done right.
-    These coupons are designed to show care, appreciation, and effort without
-    feeling cheesy or forced.
-  </p>
+      {/* COUPONS */}
+      <SectionGlow>
+        <h2 className="text-3xl font-semibold text-pink-600 mb-2">
+          Thoughtful Coupons
+        </h2>
 
-  <ul className="list-disc pl-5 text-gray-700 mb-6">
-    <li>Printable or digital coupons</li>
-    <li>Designed for partners and family</li>
-    <li>No awkward promises or pressure</li>
-    <li>Perfect as a main gift or add-on</li>
-  </ul>
+        <p className="text-gray-700 mb-6">
+          Small gestures can feel incredibly meaningful — when they’re done right.
+        </p>
 
-  <p className="font-semibold text-gray-900 mb-4">
-    Instant download • Low-pressure • High impact
-  </p>
+        <Link href="/shop/coupons">
+          <button className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700">
+            View Coupon Packs
+          </button>
+        </Link>
+      </SectionGlow>
 
-  <Link href="/shop/coupons">
-    <button className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700">
-      View Coupon Packs
-    </button>
-  </Link>
-</SectionGlow>
-{/* GAMES */}
-<SectionGlow>
-  <h2 className="text-3xl font-semibold text-pink-600 mb-2">
-    Conversation & Connection Games
-  </h2>
+      {/* GAMES */}
+      <SectionGlow>
+        <h2 className="text-3xl font-semibold text-pink-600 mb-2">
+          Conversation & Connection Games
+        </h2>
 
-  <p className="text-gray-700 mb-6">
-    Not every meaningful moment needs a big gift. Sometimes it’s just the
-    right question at the right time.
-  </p>
+        <p className="text-gray-700 mb-6">
+          Thoughtful prompts for real connection.
+        </p>
 
-  <ul className="list-disc pl-5 text-gray-700 mb-6">
-    <li>Thoughtful, natural conversation prompts</li>
-    <li>Balanced between fun and meaningful</li>
-    <li>Perfect for couples, families, or quiet nights</li>
-    <li>No forced vulnerability</li>
-  </ul>
+        <Link href="/shop/games">
+          <button className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700">
+            Explore the Games
+          </button>
+        </Link>
+      </SectionGlow>
 
-  <p className="font-semibold text-gray-900 mb-4">
-    Connection — without the pressure to say the perfect thing
-  </p>
+      {/* SLIDESHOWS */}
+      <SectionGlow>
+        <h2 className="text-3xl font-semibold text-pink-600 mb-2">
+          Emotional Slideshows
+        </h2>
 
-  <Link href="/shop/games">
-    <button className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700">
-      Explore the Games
-    </button>
-  </Link>
-</SectionGlow>
-{/* SLIDESHOWS */}
-<SectionGlow>
-  <h2 className="text-3xl font-semibold text-pink-600 mb-2">
-    Emotional Slideshows
-  </h2>
+        <p className="text-gray-700 mb-6">
+          A calm, meaningful way to express appreciation.
+        </p>
 
-  <p className="text-gray-700 mb-6">
-    When you know how you feel — but don’t know how to say it — these
-    slideshows help you learn about love, and expressing appreciation and gratitude in a
-    calm, sincere way.
-  </p>
+        <Link href="/shop/slideshows">
+          <button className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700">
+            View Slideshows
+          </button>
+        </Link>
+      </SectionGlow>
 
-  <ul className="list-disc pl-5 text-gray-700 mb-6">
-    <li>Explains the mysteries around love and gift-giving</li>
-    <li>Clean, modern design</li>
-    <li>Easy to understand</li>
-  </ul>
-
-  <p className="font-semibold text-gray-900 mb-4">
-    A quiet, meaningful way to say “you matter to me”
-  </p>
-
-  <Link href="/shop/slideshows">
-    <button className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700">
-      View Slideshows
-    </button>
-  </Link>
-</SectionGlow>
-      
-    </main> 
-  ); 
+    </main>
+  );
 }
