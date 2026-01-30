@@ -121,88 +121,92 @@ export default function ShopPage() {
           Upgrade to Personalized Match
         </button>
       </SectionGlow>
-        {/* COUPONS */}
-      <SectionGlow>
-        <h2 className="text-3xl font-semibold text-pink-600 mb-2">
-          Thoughtful Coupons
-        </h2>
+     {/* COUPONS */}
+<SectionGlow>
+  <h2 className="text-3xl font-semibold text-pink-600 mb-2">
+    Thoughtful Coupons
+  </h2>
 
-        <p className="text-gray-700 mb-6">
-          Small gestures can feel incredibly meaningful — when they’re done right.
-          These coupons are designed to show care, appreciation, and effort without
-          feeling cheesy or forced.
-        </p>
+  <p className="text-gray-700 mb-6">
+    Small gestures can feel incredibly meaningful — when they’re done right.
+    These coupons are designed to show care, appreciation, and effort without
+    feeling cheesy or forced.
+  </p>
 
-        <ul className="list-disc pl-5 text-gray-700 mb-6">
-          <li>Printable or digital coupons</li>
-          <li>Designed for partners and family</li>
-          <li>No awkward promises or pressure</li>
-          <li>Perfect as a main gift or add-on</li>
-        </ul>
+  <ul className="list-disc pl-5 text-gray-700 mb-6">
+    <li>Printable or digital coupons</li>
+    <li>Designed for partners and family</li>
+    <li>No awkward promises or pressure</li>
+    <li>Perfect as a main gift or add-on</li>
+  </ul>
 
-        <p className="font-semibold text-gray-900 mb-4">
-          Instant download • Low-pressure • High impact
-        </p>
+  <p className="font-semibold text-gray-900 mb-4">
+    Instant download • Low-pressure • High impact
+  </p>
 
-        <button className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700">
-          View Coupon Packs
-        </button>
-      </SectionGlow>
+  <Link href="/shop/coupons">
+    <button className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700">
+      View Coupon Packs
+    </button>
+  </Link>
+</SectionGlow>
+{/* GAMES */}
+<SectionGlow>
+  <h2 className="text-3xl font-semibold text-pink-600 mb-2">
+    Conversation & Connection Games
+  </h2>
 
-      {/* GAMES */}
-      <SectionGlow>
-        <h2 className="text-3xl font-semibold text-pink-600 mb-2">
-          Conversation & Connection Games
-        </h2>
+  <p className="text-gray-700 mb-6">
+    Not every meaningful moment needs a big gift. Sometimes it’s just the
+    right question at the right time.
+  </p>
 
-        <p className="text-gray-700 mb-6">
-          Not every meaningful moment needs a big gift. Sometimes it’s just the
-          right question at the right time.
-        </p>
+  <ul className="list-disc pl-5 text-gray-700 mb-6">
+    <li>Thoughtful, natural conversation prompts</li>
+    <li>Balanced between fun and meaningful</li>
+    <li>Perfect for couples, families, or quiet nights</li>
+    <li>No forced vulnerability</li>
+  </ul>
 
-        <ul className="list-disc pl-5 text-gray-700 mb-6">
-          <li>Thoughtful, natural conversation prompts</li>
-          <li>Balanced between fun and meaningful</li>
-          <li>Perfect for couples, families, or quiet nights</li>
-          <li>No forced vulnerability</li>
-        </ul>
+  <p className="font-semibold text-gray-900 mb-4">
+    Connection — without the pressure to say the perfect thing
+  </p>
 
-        <p className="font-semibold text-gray-900 mb-4">
-          Connection — without the pressure to say the perfect thing
-        </p>
+  <Link href="/shop/games">
+    <button className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700">
+      Explore the Games
+    </button>
+  </Link>
+</SectionGlow>
+{/* SLIDESHOWS */}
+<SectionGlow>
+  <h2 className="text-3xl font-semibold text-pink-600 mb-2">
+    Emotional Slideshows
+  </h2>
 
-        <button className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700">
-          Explore the Games
-        </button>
-      </SectionGlow>
+  <p className="text-gray-700 mb-6">
+    When you know how you feel — but don’t know how to say it — these
+    slideshows help you learn about love, and expressing appreciation and gratitude in a
+    calm, sincere way.
+  </p>
 
-      {/* SLIDESHOWS */}
-      <SectionGlow>
-        <h2 className="text-3xl font-semibold text-pink-600 mb-2">
-          Emotional Slideshows
-        </h2>
+  <ul className="list-disc pl-5 text-gray-700 mb-6">
+    <li>Explains the mysteries around love and gift-giving</li>
+    <li>Clean, modern design</li>
+    <li>Easy to understand</li>
+  </ul>
 
-        <p className="text-gray-700 mb-6">
-          When you know how you feel — but don’t know how to say it — these
-          slideshows help you learn how about love, and expressing appreciation and gratitude in a
-          calm, sincere way.
-        </p>
+  <p className="font-semibold text-gray-900 mb-4">
+    A quiet, meaningful way to say “you matter to me”
+  </p>
 
-        <ul className="list-disc pl-5 text-gray-700 mb-6">
-          <li>Explains the mysteries around love and gift-giiving</li>
-          <li>Clean, modern design</li>
-          <li>Easy to understand</li>
-        </ul>
-
-        <p className="font-semibold text-gray-900 mb-4">
-          A quiet, meaningful way to say “you matter to me”
-        </p>
-
-        <button className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700">
-          View Slideshows
-        </button>
-      </SectionGlow>
-
-    </main>
-  );
+  <Link href="/shop/slideshows">
+    <button className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700">
+      View Slideshows
+    </button>
+  </Link>
+</SectionGlow>
+      
+    </main> 
+  ); 
 }
