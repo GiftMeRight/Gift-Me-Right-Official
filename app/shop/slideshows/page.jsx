@@ -1,4 +1,4 @@
-"use client";
+"use client"; // ← Important! This makes the entire page a client component
 
 import React from "react";
 
