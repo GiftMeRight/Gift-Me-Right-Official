@@ -1,23 +1,33 @@
+"use client";
+
+import React from "react";
+
+function SectionGlow({ children }) {
+  return (
+    <section className="relative bg-white/80 backdrop-blur rounded-3xl p-10 shadow-sm my-12">
+      <div className="absolute inset-0 bg-gradient-to-tr from-pink-200 via-pink-100 to-white/0 opacity-40 -z-10 rounded-3xl" />
+      {children}
+    </section>
+  );
+}
+
 export default function CouponsSuccessPage() {
   return (
-    <main className="min-h-screen bg-[#0b0b0f] text-white px-6 py-20 flex items-center justify-center">
-      <div className="max-w-xl w-full text-center space-y-6">
-        <h1 className="text-4xl font-bold">
-          🎉 Coupons Unlocked!
+    <main className="px-6 py-16 max-w-4xl mx-auto">
+      <SectionGlow>
+        <h1 className="text-4xl font-bold text-center mb-4">
+          Your Coupons Are Ready 💌
         </h1>
-
-        <p className="text-white/70 text-lg">
-          Your coupon pack is ready to use. These were designed to spark connection,
-          fun, and meaningful moments — enjoy every one of them.
+        <p className="text-center text-gray-700">
+          Your download will be available immediately. Save it, print it, or gift it.
         </p>
+      </SectionGlow>
 
-        <a
-          href="/shop"
-          className="inline-block mt-6 rounded-xl bg-pink-600 px-6 py-3 font-semibold hover:bg-pink-500 transition"
-        >
-          Back to Shop
-        </a>
-      </div>
+      <SectionGlow>
+        <p className="text-gray-700">
+          These coupons are for personal use only and may not be resold or redistributed.
+        </p>
+      </SectionGlow>
     </main>
   );
 }
