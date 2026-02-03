@@ -4,26 +4,27 @@ import { NextResponse } from "next/server";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req) {
-  const { priceId } = await req.json();
-
   try {
+    const { priceId, successPath } = await req.json();
+
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
       mode: "payment",
+      payment_method_types: ["card"],
       line_items: [
         {
           price: priceId,
           quantity: 1,
         },
       ],
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}${successPath}`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/shop`,
     });
 
     return NextResponse.json({ url: session.url });
-  } catch (err) {
+  } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { error: err.message },
+      { error: "Checkout failed" },
       { status: 500 }
     );
   }
