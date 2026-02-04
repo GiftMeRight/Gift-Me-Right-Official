@@ -52,7 +52,7 @@ export default function SlideshowsPage() {
           Learning About Love: The Relationship 101 Presentation
         </h2>
         <p className="text-gray-700 mb-4">19 slides — clear, engaging, and insightful.</p>
-        <p className="font-semibold text-gray-900 mb-4">$14.99 • Instant download</p>
+        <p className="font-semibold text-gray-900 mb-4">$11.99 • Instant download</p>
         <button
           onClick={() => checkout("price_1Stvq4AAECronuKAnbp9mtfT")}
           className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
@@ -67,7 +67,7 @@ export default function SlideshowsPage() {
           Love for Brainiacs: Clever Connections
         </h2>
         <p className="text-gray-700 mb-4">20 slides — scientifically backed insights.</p>
-        <p className="font-semibold text-gray-900 mb-4">$14.99 • Instant download</p>
+        <p className="font-semibold text-gray-900 mb-4">$11.99 • Instant download</p>
         <button
           onClick={() => checkout("price_1StvqaAAECronuKAXgQstRgP")}
           className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
@@ -82,7 +82,7 @@ export default function SlideshowsPage() {
           The Science of Better Gift-Giving: Make Every Gift Count
         </h2>
         <p className="text-gray-700 mb-4">19 slides — make your gifts meaningful and thoughtful.</p>
-        <p className="font-semibold text-gray-900 mb-4">$14.99 • Instant download</p>
+        <p className="font-semibold text-gray-900 mb-4">$11.99 • Instant download</p>
         <button
           onClick={() => checkout("price_1StvsjAAECronuKAsk3QyRvg")}
           className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
@@ -97,7 +97,7 @@ export default function SlideshowsPage() {
           When the Brain Loves & Breaks: Understanding Emotional Patterns
         </h2>
         <p className="text-gray-700 mb-4">14 slides — explore love and heartbreak from a psychological perspective.</p>
-        <p className="font-semibold text-gray-900 mb-4">$14.99 • Instant download</p>
+        <p className="font-semibold text-gray-900 mb-4">$11.99 • Instant download</p>
         <button
           onClick={() => checkout("price_1StvtKAAECronuKA3l28jLCU")}
           className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
