@@ -15,7 +15,7 @@ export default function SuccessFamilyFun() {
   return (
     <main className="px-6 py-16 max-w-4xl mx-auto">
       <SectionGlow>
-        <h1 className="text-4xl font-bold text-center mb-4">
+        <h1 className="text-4xl font-bold text-center text-black mb-4">
           Family Fun Coupons 🎉
         </h1>
         <p className="text-center text-gray-700">
