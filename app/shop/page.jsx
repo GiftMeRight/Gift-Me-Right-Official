@@ -35,7 +35,7 @@ async function checkout(priceId, successPath = "/success") {
 /* ---------------- SHOP PAGE ---------------- */
 export default function ShopPage() {
   return (
-    <main className="soft-glow min-h-screen px-6 py-16 max-w-5xl mx-auto">
+    <main className="min-h-screen bg-black px-6 py-16 max-w-5xl mx-auto">
 
       {/* HEADER */}
       <SectionGlow>
