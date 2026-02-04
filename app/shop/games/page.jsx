@@ -54,7 +54,7 @@ export default function GamesPage() {
         <p className="text-gray-700 mb-4">
           20 pages • 5 questions per page • Lighthearted fun for teen couples
         </p>
-        <p className="font-semibold text-gray-900 mb-4">$9.99 • Instant download</p>
+        <p className="font-semibold text-gray-900 mb-4">$4.99 • Instant download</p>
         <button
           onClick={() => checkout("price_1StvlVAAECronuKAQrzxDMem")}
           className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
@@ -71,7 +71,7 @@ export default function GamesPage() {
         <p className="text-gray-700 mb-4">
           19 pages • 5 questions per page • Fun and meaningful questions for family bonding
         </p>
-        <p className="font-semibold text-gray-900 mb-4">$9.99 • Instant download</p>
+        <p className="font-semibold text-gray-900 mb-4">$4.99 • Instant download</p>
         <button
           onClick={() => checkout("price_1StvmPAAECronuKABuovXtyZ")}
           className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
