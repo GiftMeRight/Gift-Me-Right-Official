@@ -16,11 +16,11 @@ function SectionGlow({ children, className = "" }) {
 }
 
 /* ---------------- STRIPE CHECKOUT ---------------- */
-async function checkout(priceId) {
+async function checkout(priceId, successPath) {
   const res = await fetch("/api/checkout", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ priceId }),
+    body: JSON.stringify({ priceId, successPath }),
   });
 
   const data = await res.json();
@@ -54,12 +54,20 @@ export default function CouponsPage() {
         <p className="text-gray-700 mb-4">
           31 pages • 4 coupons per page • Designed for parents, siblings, and BFFs
         </p>
-        <p className="font-semibold text-gray-900 mb-4">$9.99 • Instant download</p>
+        <p className="font-semibold text-gray-900 mb-4">
+          $9.99 • Instant download
+        </p>
+
         <button
-          onClick={() => checkout("price_1StvhfAAECronuKAhohialtZ")}
-          className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
+          onClick={() =>
+            checkout(
+              "price_1StvhfAAECronuKAhohialtZ",
+              "/shop/coupons/success/family"
+            )
+          }
+          className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700 transition"
         >
-          Buy Family Coupons
+          Buy Family Coupons →
         </button>
       </SectionGlow>
 
@@ -71,14 +79,23 @@ export default function CouponsPage() {
         <p className="text-gray-700 mb-4">
           51 pages • 4 coupons per page • Fun and intimate gestures for your partner
         </p>
-        <p className="font-semibold text-gray-900 mb-4">$14.99 • Instant download</p>
+        <p className="font-semibold text-gray-900 mb-4">
+          $14.99 • Instant download
+        </p>
+
         <button
-          onClick={() => checkout("price_1StvjgAAECronuKAeJaJbisR")}
-          className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
+          onClick={() =>
+            checkout(
+              "price_1StvjgAAECronuKAeJaJbisR",
+              "/shop/coupons/success/partner"
+            )
+          }
+          className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700 transition"
         >
-          Buy Partner Coupons
+          Buy Partner Coupons →
         </button>
       </SectionGlow>
+
     </main>
   );
 }
