@@ -80,7 +80,7 @@ export default function CouponsPage() {
           51 pages • 4 coupons per page • Fun and intimate gestures for your partner
         </p>
         <p className="font-semibold text-gray-900 mb-4">
-          $14.99 • Instant download
+          $11.99 • Instant download
         </p>
 
         <button
