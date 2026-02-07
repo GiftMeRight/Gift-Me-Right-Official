@@ -16,7 +16,7 @@ export default function SuccessBrainLovesBreaks() {
         </p>
 
         <a
-          href="PASTE_PDF_LINK_HERE"
+          href="/downloads/brain-loves-and-breaks.pdf"
           target="_blank"
           className="inline-block bg-pink-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-pink-700 transition"
         >
