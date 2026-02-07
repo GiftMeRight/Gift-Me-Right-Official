@@ -1,49 +1,27 @@
 "use client";
+import React from "react";
 
-import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
-
-export default function SuccessFamilyCoupons() {
-  const searchParams = useSearchParams();
-  const sessionId = searchParams.get("session_id");
-
-  const [verified, setVerified] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function verify() {
-      const res = await fetch("/api/verify-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sessionId }),
-      });
-
-      const data = await res.json();
-      setVerified(data.paid);
-      setLoading(false);
-    }
-
-    if (sessionId) verify();
-  }, [sessionId]);
-
-  if (loading) return <p className="text-center">Verifying purchase…</p>;
-
-  if (!verified) {
-    return <p className="text-center">Access denied.</p>;
-  }
-
+export default function FamilyFunCouponsSuccess() {
   return (
-    <main className="px-6 py-16 max-w-4xl mx-auto text-center">
-      <h1 className="text-4xl font-bold mb-4">
-        Your Coupons Are Ready 🎉
-      </h1>
+    <main className="min-h-screen bg-black px-6 py-16 flex items-center justify-center">
+      <section className="bg-white rounded-3xl p-10 max-w-xl w-full text-center shadow-lg">
+        <h1 className="text-4xl font-bold text-black mb-4">
+          Family Fun Coupons 🎉
+        </h1>
 
-      <a
-        href={`/api/download?session_id=${sessionId}&file=family-fun-coupons.pdf`}
-        className="inline-block bg-black text-white px-8 py-4 rounded-lg font-semibold"
-      >
-        Download Your PDF
-      </a>
+        <p className="text-gray-700 mb-8">
+          Your coupon pack is ready! These are designed to spark laughter,
+          bonding, and meaningful moments together.
+        </p>
+
+        <a
+          href="/downloads/family-fun-coupons.pdf"
+          target="_blank"
+          className="inline-block bg-pink-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-pink-700 transition"
+        >
+          Download Your Coupons
+        </a>
+      </section>
     </main>
   );
 }
