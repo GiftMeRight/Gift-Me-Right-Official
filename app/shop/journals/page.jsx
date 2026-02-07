@@ -51,7 +51,7 @@ export default function JournalsPage() {
 
         <ul className="space-y-6 text-black">
           <li>
-            <strong>For My Partner</strong> — $19.99
+            <strong>For My Partner</strong> — $14.99
             <br />
             <button
               onClick={() =>
@@ -67,7 +67,7 @@ export default function JournalsPage() {
           </li>
 
           <li>
-            <strong>For My Boyfriend</strong> — $19.99
+            <strong>For My Boyfriend</strong> — $14.99
             <br />
             <button
               onClick={() =>
@@ -83,7 +83,7 @@ export default function JournalsPage() {
           </li>
 
           <li>
-            <strong>For My Girlfriend</strong> — $19.99
+            <strong>For My Girlfriend</strong> — $14.99
             <br />
             <button
               onClick={() =>
@@ -140,7 +140,7 @@ export default function JournalsPage() {
           </li>
 
           <li>
-            <strong>For My Gym Buddy</strong> — $9.99
+            <strong>For My Gym Buddy</strong> — $13.99
             <br />
             <button
               onClick={() =>
@@ -165,7 +165,7 @@ export default function JournalsPage() {
 
         <ul className="space-y-6 text-black">
           <li>
-            <strong>OCD Edition</strong> — $24.99
+            <strong>OCD Edition</strong> — $16.99
             <br />
             <button
               onClick={() =>
@@ -181,7 +181,7 @@ export default function JournalsPage() {
           </li>
 
           <li>
-            <strong>ADHD Edition</strong> — $24.99
+            <strong>ADHD Edition</strong> — $16.99
             <br />
             <button
               onClick={() =>
