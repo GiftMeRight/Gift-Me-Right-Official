@@ -1,40 +1,27 @@
 "use client";
-
 import React from "react";
 
-function SectionGlow({ children }) {
-  return (
-    <section className="relative bg-white/80 backdrop-blur rounded-3xl p-10 shadow-sm my-12">
-      <div className="absolute inset-0 bg-gradient-to-tr from-pink-200 via-pink-100 to-white/0 opacity-40 -z-10 rounded-3xl" />
-      {children}
-    </section>
-  );
-}
-
 export default function PartnerCouponsSuccess() {
-  const sessionId =
-    typeof window !== "undefined"
-      ? new URLSearchParams(window.location.search).get("session_id")
-      : "";
-
   return (
-    <main className="px-6 py-16 max-w-4xl mx-auto">
-      <SectionGlow>
-        <h1 className="text-4xl font-bold text-center text-gray-900 mb-4">
-          Your Partner Coupons Are Ready 🔥
+    <main className="min-h-screen bg-black px-6 py-16 flex items-center justify-center">
+      <section className="bg-white rounded-3xl p-10 max-w-xl w-full text-center shadow-lg">
+        <h1 className="text-4xl font-bold text-black mb-4">
+          Naughty & Nice Coupons 🔥
         </h1>
 
-        <p className="text-center text-gray-700 mb-6">
-          Download your Naughty & Nice coupon pack below.
+        <p className="text-gray-700 mb-8">
+          Your partner coupon pack is ready. Thoughtful, flirty,
+          and designed to deepen connection.
         </p>
 
         <a
-          href={`/api/download?session_id=${sessionId}`}
-          className="block text-center bg-pink-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-pink-700"
+          href="/downloads/partner-coupons.pdf"
+          target="_blank"
+          className="inline-block bg-pink-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-pink-700 transition"
         >
-          Download Coupons
+          Download Your Coupons
         </a>
-      </SectionGlow>
+      </section>
     </main>
   );
 }
