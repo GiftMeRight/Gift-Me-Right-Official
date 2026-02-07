@@ -1,40 +1,26 @@
 "use client";
-
 import React from "react";
 
-function SectionGlow({ children }) {
+export default function SuccessTeenCoupleQuiz() {
   return (
-    <section className="relative bg-white/80 backdrop-blur rounded-3xl p-10 shadow-sm my-12">
-      <div className="absolute inset-0 bg-gradient-to-tr from-pink-200 via-pink-100 to-white/0 opacity-40 -z-10 rounded-3xl" />
-      {children}
-    </section>
-  );
-}
-
-export default function TeenGameSuccess() {
-  const sessionId =
-    typeof window !== "undefined"
-      ? new URLSearchParams(window.location.search).get("session_id")
-      : "";
-
-  return (
-    <main className="px-6 py-16 max-w-4xl mx-auto">
-      <SectionGlow>
-        <h1 className="text-4xl font-bold text-center text-gray-900 mb-4">
-          Let the Fun Begin 💕
+    <main className="min-h-screen bg-black px-6 py-16 flex items-center justify-center">
+      <section className="bg-white rounded-3xl p-10 max-w-xl w-full text-center shadow-lg">
+        <h1 className="text-4xl font-bold text-black mb-4">
+          Teen Couple Quiz 💕
         </h1>
 
-        <p className="text-center text-gray-700 mb-6">
-          Download your Teen Couple Quiz below.
+        <p className="text-gray-700 mb-8">
+          A fun, flirty way to spark conversation, laughter, and connection.
         </p>
 
         <a
-          href={`/api/download?session_id=${sessionId}`}
-          className="block text-center bg-pink-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-pink-700"
+          href="/downloads/teen-couple-quiz.pdf"
+          target="_blank"
+          className="inline-block bg-pink-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-pink-700 transition"
         >
-          Download Game
+          Download Your Game
         </a>
-      </SectionGlow>
+      </section>
     </main>
   );
 }
