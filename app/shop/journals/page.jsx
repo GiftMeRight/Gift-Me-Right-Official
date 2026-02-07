@@ -51,11 +51,14 @@ export default function JournalsPage() {
 
         <ul className="space-y-6">
           <li>
-            <strong>For My Partner</strong> — $19.99  
+            <strong>For My Partner</strong> — $19.99
             <br />
             <button
               onClick={() =>
-                checkout("PRICE_ID_PARTNER", "/success/journals/partner")
+                checkout(
+                  "price_1SyIcLAAECronuKA7Urzexxr",
+                  "/success/journals/partner"
+                )
               }
               className="mt-2 bg-pink-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-pink-700"
             >
@@ -64,11 +67,14 @@ export default function JournalsPage() {
           </li>
 
           <li>
-            <strong>For My Boyfriend</strong> — $19.99  
+            <strong>For My Boyfriend</strong> — $19.99
             <br />
             <button
               onClick={() =>
-                checkout("PRICE_ID_BOYFRIEND", "/success/journals/boyfriend")
+                checkout(
+                  "price_1SyIdBAAECronuKAEON7UK5n",
+                  "/success/journals/boyfriend"
+                )
               }
               className="mt-2 bg-pink-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-pink-700"
             >
@@ -77,11 +83,14 @@ export default function JournalsPage() {
           </li>
 
           <li>
-            <strong>For My Girlfriend</strong> — $19.99  
+            <strong>For My Girlfriend</strong> — $19.99
             <br />
             <button
               onClick={() =>
-                checkout("PRICE_ID_GIRLFRIEND", "/success/journals/girlfriend")
+                checkout(
+                  "price_1SyIezAAECronuKAnpN0XnIi",
+                  "/success/journals/girlfriend"
+                )
               }
               className="mt-2 bg-pink-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-pink-700"
             >
@@ -99,11 +108,14 @@ export default function JournalsPage() {
 
         <ul className="space-y-6">
           <li>
-            <strong>For My Best Friend</strong> — $14.99  
+            <strong>For My Best Friend</strong> — $14.99
             <br />
             <button
               onClick={() =>
-                checkout("PRICE_ID_BEST_FRIEND", "/success/journals/best-friend")
+                checkout(
+                  "price_1SyIhTAAECronuKAG5mnt5eB",
+                  "/success/journals/best-friend"
+                )
               }
               className="mt-2 bg-pink-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-pink-700"
             >
@@ -112,11 +124,14 @@ export default function JournalsPage() {
           </li>
 
           <li>
-            <strong>For My Family</strong> — $14.99  
+            <strong>For My Family</strong> — $14.99
             <br />
             <button
               onClick={() =>
-                checkout("PRICE_ID_FAMILY", "/success/journals/family")
+                checkout(
+                  "price_1SyIiEAAECronuKA3mXR0Xr3",
+                  "/success/journals/family"
+                )
               }
               className="mt-2 bg-pink-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-pink-700"
             >
@@ -125,11 +140,14 @@ export default function JournalsPage() {
           </li>
 
           <li>
-            <strong>For My Gym Buddy</strong> — $9.99  
+            <strong>For My Gym Buddy</strong> — $9.99
             <br />
             <button
               onClick={() =>
-                checkout("PRICE_ID_GYM", "/success/journals/gym-buddy")
+                checkout(
+                  "price_1SyIkQAAECronuKALpULbUCd",
+                  "/success/journals/gym-buddy"
+                )
               }
               className="mt-2 bg-pink-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-pink-700"
             >
@@ -147,11 +165,14 @@ export default function JournalsPage() {
 
         <ul className="space-y-6">
           <li>
-            <strong>OCD Edition</strong> — $24.99  
+            <strong>OCD Edition</strong> — $24.99
             <br />
             <button
               onClick={() =>
-                checkout("PRICE_ID_OCD", "/success/journals/ocd")
+                checkout(
+                  "price_1SyImVAAECronuKAA1OpPM8B",
+                  "/success/journals/ocd"
+                )
               }
               className="mt-2 bg-pink-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-pink-700"
             >
@@ -160,11 +181,14 @@ export default function JournalsPage() {
           </li>
 
           <li>
-            <strong>ADHD Edition</strong> — $24.99  
+            <strong>ADHD Edition</strong> — $24.99
             <br />
             <button
               onClick={() =>
-                checkout("PRICE_ID_ADHD", "/success/journals/adhd")
+                checkout(
+                  "price_1SyInQAAECronuKAj86pavkF",
+                  "/success/journals/adhd"
+                )
               }
               className="mt-2 bg-pink-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-pink-700"
             >
