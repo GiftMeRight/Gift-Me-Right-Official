@@ -1,26 +1,19 @@
 "use client";
-
 import React from "react";
 
 function SectionGlow({ children }) {
   return (
-    <section className="relative bg-white/80 backdrop-blur rounded-3xl p-10 shadow-sm my-12">
-      <div className="absolute inset-0 bg-gradient-to-tr from-pink-200 via-pink-100 to-white/0 opacity-40 -z-10 rounded-3xl" />
+    <section className="relative bg-white rounded-3xl p-10 shadow-sm my-12">
       {children}
     </section>
   );
 }
 
 export default function FamilyGameSuccess() {
-  const sessionId =
-    typeof window !== "undefined"
-      ? new URLSearchParams(window.location.search).get("session_id")
-      : "";
-
   return (
-    <main className="px-6 py-16 max-w-4xl mx-auto">
+    <main className="min-h-screen bg-black px-6 py-16 flex items-center justify-center">
       <SectionGlow>
-        <h1 className="text-4xl font-bold text-center text-gray-900 mb-4">
+        <h1 className="text-4xl font-bold text-center text-black mb-4">
           Your Game Is Ready 🎲
         </h1>
 
@@ -29,7 +22,8 @@ export default function FamilyGameSuccess() {
         </p>
 
         <a
-          href={`/api/download?session_id=${sessionId}`}
+          href="/downloads/family-brainstorm-game.pdf"
+          target="_blank"
           className="block text-center bg-pink-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-pink-700"
         >
           Download Game
