@@ -113,6 +113,24 @@ export default function ShopPage() {
         </button>
       </SectionGlow>
 
+      {/* JOURNALS */}
+<SectionGlow>
+  <h2 className="text-3xl font-semibold text-pink-600 mb-2">
+    Guided Journals
+  </h2>
+
+  <p className="text-gray-700 mb-6">
+    Thoughtful, structured journals designed to help others understand and love you better.`
+  </p>
+
+  <button
+    onClick={() => window.location.href = "/shop/journals"}
+    className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
+  >
+    View Journals
+  </button>
+</SectionGlow>
+
       {/* COUPONS */}
       <SectionGlow>
         <h2 className="text-3xl font-semibold text-pink-600 mb-2">
