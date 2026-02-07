@@ -49,7 +49,7 @@ export default function JournalsPage() {
           Relationship Journals
         </h2>
 
-        <ul className="space-y-6">
+        <ul className="space-y-6 text-black">
           <li>
             <strong>For My Partner</strong> — $19.99
             <br />
@@ -106,7 +106,7 @@ export default function JournalsPage() {
           Friends & Family
         </h2>
 
-        <ul className="space-y-6">
+        <ul className="space-y-6 text-black">
           <li>
             <strong>For My Best Friend</strong> — $14.99
             <br />
@@ -163,7 +163,7 @@ export default function JournalsPage() {
           Neurodivergent Editions
         </h2>
 
-        <ul className="space-y-6">
+        <ul className="space-y-6 text-black">
           <li>
             <strong>OCD Edition</strong> — $24.99
             <br />
