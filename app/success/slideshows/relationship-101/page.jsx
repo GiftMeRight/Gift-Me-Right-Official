@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 
 export default function SuccessRelationship101() {
@@ -7,16 +6,16 @@ export default function SuccessRelationship101() {
     <main className="min-h-screen bg-black px-6 py-16 flex items-center justify-center">
       <section className="bg-white rounded-3xl p-10 max-w-xl w-full text-center shadow-lg">
         <h1 className="text-4xl font-bold text-black mb-4">
-          Learning About Love: Relationship 101 💞
+          Relationship 101 💞
         </h1>
 
         <p className="text-gray-700 mb-8">
-          Your Relationship 101 slideshow is ready — designed to teach,
-          reflect, and strengthen connections.
+          This slideshow breaks down the foundations of healthy, intentional
+          relationships in a simple and meaningful way.
         </p>
 
         <a
-          href="PASTE_PDF_LINK_HERE"
+          href="/downloads/relationship-101-slideshow.pdf"
           target="_blank"
           className="inline-block bg-pink-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-pink-700 transition"
         >
