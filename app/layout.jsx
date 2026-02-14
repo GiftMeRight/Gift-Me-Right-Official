@@ -11,20 +11,41 @@ export default function RootLayout({ children }) {
       </head>
 
       <body className="bg-[#fffafc] dark:bg-neutral-950 text-gray-900 dark:text-gray-100 transition-colors duration-500">
+        
         {/* HEADER */}
-        <header className="max-w-7xl mx-auto px-6 py-4">
-          <Image
-            src="/logo.png"
-            alt="Gift Me Right logo"
-            width={140}
-            height={140}
-            priority
-          />
+        <header className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
+          
+          {/* Logo */}
+          <a href="/">
+            <Image
+              src="/logo.png"
+              alt="Gift Me Right logo"
+              width={120}
+              height={120}
+              priority
+            />
+          </a>
+
+          {/* Navigation */}
+          <nav className="hidden md:flex gap-8 text-sm font-medium">
+            <a href="/shop" className="hover:text-pink-600 transition">
+              Shop
+            </a>
+            <a href="/how-it-works" className="hover:text-pink-600 transition">
+              How It Works
+            </a>
+            <a
+              href="mailto:giftmerightofficial@gmail.com"
+              className="hover:text-pink-600 transition"
+            >
+              Contact
+            </a>
+          </nav>
         </header>
 
-        {/* PAGE CONTENT */}
         <main>{children}</main>
-        {/* FOOTER */}
+
+ {/* FOOTER */}
         <footer className="bg-black text-gray-400 py-8 mt-16">
           <div className="max-w-7xl mx-auto px-6 text-center space-y-4">
             
