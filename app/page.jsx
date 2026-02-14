@@ -108,31 +108,51 @@ export default function HomePage() {
           Explore More Ways to Connect
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-10 mt-10 text-center">
-          {[
-            {
-              img: "/images/fill-it-out.jpg",
-              title: "Guided Blueprints",
-              desc: "Structured clarity that removes gifting anxiety.",
-            },
-            {
-              img: "/images/design-it.jpg",
-              title: "Connection Games",
-              desc: "Prompts that deepen conversations naturally.",
-            },
-            {
-              img: "/images/gift-better.jpg",
-              title: "Emotional Slideshows",
-              desc: "Say what’s hard to put into words.",
-            },
-          ].map((item, idx) => (
-            <div key={idx} className="space-y-4">
-              <div className="relative w-24 h-24 mx-auto rounded-full overflow-hidden shadow-lg hover:scale-110 transition">
-                <Image src={item.img} alt={item.title} fill className="object-cover" />
-              </div>
-              <h3 className="font-semibold text-xl">{item.title}</h3>
-              <p className="text-gray-600 dark:text-gray-300">{item.desc}</p>
-            </div>
+       <div className="grid md:grid-cols-3 gap-10 mt-10 text-center">
+  {[
+    {
+      img: "/images/fill-it-out.jpg",
+      title: "Guided Blueprints",
+      desc: "Structured clarity that removes gifting anxiety.",
+      link: "/shop",
+      button: "Explore Blueprints",
+    },
+    {
+      img: "/images/design-it.jpg",
+      title: "Connection Games",
+      desc: "Prompts that deepen conversations naturally.",
+      link: "/shop/games",
+      button: "Explore Games",
+    },
+    {
+      img: "/images/gift-better.jpg",
+      title: "Emotional Slideshows",
+      desc: "Say what’s hard to put into words.",
+      link: "/shop/slideshows",
+      button: "Explore Slideshows",
+    },
+  ].map((item, idx) => (
+    <div key={idx} className="space-y-4">
+      <div className="relative w-24 h-24 mx-auto rounded-full overflow-hidden shadow-lg hover:scale-110 transition">
+        <Image src={item.img} alt={item.title} fill className="object-cover" />
+      </div>
+
+      <h3 className="font-semibold text-xl">{item.title}</h3>
+
+      <p className="text-gray-600 dark:text-gray-300">
+        {item.desc}
+      </p>
+
+      <a
+        href={item.link}
+        className="inline-block mt-3 bg-pink-600 text-white px-6 py-2 rounded-full text-sm font-semibold hover:scale-105 transition"
+      >
+        {item.button}
+      </a>
+    </div>
+  ))}
+</div>
+
           ))}
         </div>
       </SectionGlow>
