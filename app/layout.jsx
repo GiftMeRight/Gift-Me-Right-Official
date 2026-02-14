@@ -24,6 +24,32 @@ export default function RootLayout({ children }) {
 
         {/* PAGE CONTENT */}
         <main>{children}</main>
+        {/* FOOTER */}
+        <footer className="bg-black text-gray-400 py-8 mt-16">
+          <div className="max-w-7xl mx-auto px-6 text-center space-y-4">
+            
+            <div className="space-x-6 text-sm">
+              <a href="/privacy" className="hover:text-white transition">
+                Privacy Policy
+              </a>
+              <a href="/terms" className="hover:text-white transition">
+                Terms of Service
+              </a>
+              <a href="/refund" className="hover:text-white transition">
+                Refund Policy
+              </a>
+              <a href="/disclaimer" className="hover:text-white transition">
+                Disclaimer
+              </a>
+            </div>
+
+            <p className="text-xs text-gray-500">
+              © {new Date().getFullYear()} Gift Me Right. All rights reserved.
+            </p>
+
+          </div>
+        </footer>
+
       </body>
     </html>
   );
