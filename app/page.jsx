@@ -152,9 +152,6 @@ export default function HomePage() {
     </div>
   ))}
 </div>
-
-          ))}
-        </div>
       </SectionGlow>
 
       {/* FINAL CTA */}
