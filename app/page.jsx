@@ -33,6 +33,42 @@ export default function HomePage() {
             The platform that helps you give a gift that actually lands —
             a personalized blueprint based on who they truly are.
           </p>
+          {/* Floating Hearts */}
+<div className="absolute inset-0 pointer-events-none">
+  {Array.from({ length: 8 }).map((_, idx) => (
+    <div
+      key={idx}
+      className="floating-heart"
+      style={{
+        left: `${Math.random() * 90}%`,
+        fontSize: `${Math.random() * 12 + 12}px`,
+        animationDuration: `${Math.random() * 6 + 6}s`,
+        animationDelay: `${Math.random() * 5}s`,
+      }}
+    >
+      ❤️
+    </div>
+  ))}
+</div>
+
+{/* Sparkles */}
+<div className="absolute inset-0 pointer-events-none">
+  {Array.from({ length: 10 }).map((_, idx) => (
+    <div
+      key={idx}
+      className="sparkle"
+      style={{
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        width: `${Math.random() * 6 + 4}px`,
+        height: `${Math.random() * 6 + 4}px`,
+        animationDuration: `${Math.random() * 10 + 10}s`,
+        animationDelay: `${Math.random() * 6}s`,
+      }}
+    />
+  ))}
+</div>
+
 
           <div className="mt-8 flex justify-center gap-4">
             <a
