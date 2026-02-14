@@ -1,10 +1,17 @@
 "use client";
-import { useEffect } from "react";
 
 export default function PrivacyPolicy() {
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "<style>
+  return (
+    <main className="min-h-screen bg-black px-6 py-16">
+      <div className="bg-white rounded-3xl p-10 max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold text-black mb-8 text-center">
+          Privacy Policy
+        </h1>
+
+        <div
+          dangerouslySetInnerHTML={{
+            __html: `
+              <style>
   [data-custom-class='body'], [data-custom-class='body'] * {
           background: transparent !important;
         }
@@ -58,19 +65,10 @@ word-break: break-word !important;
       }
     </style>
       </div>
-      <br><div><span data-custom-class='body_text'>This Privacy Policy was created using Termly's </span><a href="https://termly.io/products/privacy-policy-generator/" target="_blank" rel="noopener external" data-custom-class='link'>Privacy Policy Generator</a></div>";
-    script.async = true;
-    document.body.appendChild(script);
-  }, []);
-
-  return (
-    <main className="min-h-screen bg-black px-6 py-16">
-      <div className="bg-white rounded-3xl p-10 max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold text-black mb-6 text-center">
-          Privacy Policy
-        </h1>
-
-        <div id="termly-embed"></div>
+      <br><div><span data-custom-class='body_text'>This Privacy Policy was created using Termly's </span><a href="https://termly.io/products/privacy-policy-generator/" target="_blank" rel="noopener external" data-custom-class='link'>Privacy Policy Generator</a></div>
+            `,
+          }}
+        />
       </div>
     </main>
   );
