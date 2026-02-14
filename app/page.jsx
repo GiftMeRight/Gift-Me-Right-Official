@@ -17,11 +17,9 @@ function SectionGlow({ children, className = "" }) {
     <section
       className={`animate-fadeIn relative bg-white/80 dark:bg-gray-900/80 backdrop-blur rounded-3xl p-10 shadow-sm overflow-hidden my-12 ${className}`}
     >
-      {/* Gradient glow */}
       <div className="absolute inset-0 bg-gradient-to-tr from-pink-200 via-pink-100 to-white/0 dark:from-pink-900 dark:via-pink-800 dark:to-black/0 opacity-40 -z-10 rounded-3xl" />
       <div className="absolute inset-0 bg-glow -z-20 rounded-3xl" />
 
-      {/* Floating particles */}
       {particles.map((p, idx) => (
         <div
           key={idx}
@@ -52,19 +50,20 @@ export default function HomePage() {
       <SectionGlow className="soft-glow mt-6">
         <div className="relative flex flex-col items-center text-center">
 
-          {/* Title */}
           <h1 className="text-4xl md:text-5xl font-bold leading-tight text-gray-900 dark:text-gray-50">
             Welcome to <span className="text-pink-600">Gift Me Right</span>
           </h1>
 
-          {/* Subtitle */}
-          <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mt-4">
-  The platform that helps you give a gift that actually lands.
-  No guessing. No stress. Just a clear, personalized plan
-  based on who they truly are.
+          <p className="uppercase tracking-widest text-xs text-pink-500 mt-4">
+            No stress. No guesswork. Just clarity.
           </p>
 
-          {/* Floating hearts BELOW subtitle */}
+          <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mt-4">
+            The platform that helps you give a gift that actually lands.
+            A clear, personalized blueprint based on who they truly are.
+          </p>
+
+          {/* Floating hearts */}
           <div className="relative w-full h-12 mt-2 pointer-events-none">
             {Array.from({ length: 8 }).map((_, idx) => (
               <div
@@ -83,25 +82,25 @@ export default function HomePage() {
             ))}
           </div>
 
+          {/* PRIMARY CTA */}
+          <div className="mt-8 flex flex-col md:flex-row justify-center gap-4">
+            <a
+              href="/shop"
+              className="bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 hover:shadow-lg"
+            >
+              Get My Gift Blueprint
+            </a>
 
-<div className="mt-8 flex justify-center gap-4">
-  <a
-    href="/shop"
-    className="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700"
-  >
-    Get My Gift Blueprint
-  </a>
+            <a
+              href="/how-it-works"
+              className="border px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition"
+            >
+              How It Works
+            </a>
+          </div>
 
-  <a
-    href="/how-it-works"
-    className="border px-6 py-3 rounded-lg font-semibold hover:bg-gray-50"
-  >
-    How It Works
-  </a>
-</div>
-        
           {/* Hero image */}
-          <div className="relative w-full max-w-3xl h-64 md:h-96 rounded-3xl overflow-hidden shadow-lg mt-10">
+          <div className="relative w-full max-w-3xl h-64 md:h-96 rounded-3xl overflow-hidden shadow-lg mt-12">
             <Image
               src="/images/hero-gift.jpg"
               alt="Beautiful gift wrapping"
@@ -110,74 +109,17 @@ export default function HomePage() {
               priority
             />
           </div>
-                    {/* PRIMARY + SECONDARY CTA */}
-          <div className="mt-8 flex flex-col items-center gap-4">
-            {/* Primary: Direct Builder */}
-            <a
-              href="/create"
-              className="inline-block bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 hover:shadow-lg"
-            >
-              Create Your Journal
-            </a>
-
-            {/* Secondary: Quiz */}
-            <a
-              href="/quiz"
-              className="inline-block border border-pink-400 text-pink-600 dark:text-pink-400 px-8 py-3 rounded-full text-base font-medium transition transform hover:scale-105 hover:bg-pink-50 dark:hover:bg-gray-800 text-center"
-            >
-              💖 Take the “All About Me” Quiz
-              <span className="block text-sm opacity-80 mt-1">
-                Takes ~2 minutes
-              </span>
-            </a>
-          </div>
         </div>
       </SectionGlow>
-
-      {/* Coupons, slideshow, games section */}
-      <SectionGlow>
-  <h2 className="text-3xl font-semibold text-center text-gray-900 dark:text-gray-50">
-    How Gift Me Right Helps
-  </h2>
-
-  <div className="grid md:grid-cols-3 gap-10 text-center">
-    <div>
-      <h3 className="text-xl font-semibold text-pink-600 mb-2">
-        Thoughtful Coupons
-      </h3>
-      <p className="text-gray-700 dark:text-gray-300"> 
-        Small gestures designed to feel meaningful — not forced.
-      </p>
-    </div>
-
-    <div>
-      <h3 className="text-xl font-semibold text-pink-600 mb-2">
-        Connection Games
-      </h3>
- <p className="text-gray-700 dark:text-gray-300"> 
-        Conversation starters that bring people closer, naturally.
-      </p>
-    </div>
-
-    <div>
-      <h3 className="text-xl font-semibold text-pink-600 mb-2">
-        Emotional Slideshows
-      </h3>
-       <p className="text-gray-700 dark:text-gray-300"> 
-        A simple way to say what’s hard to put into words.
-      </p>
-    </div>
-  </div>
-</SectionGlow>
 
       {/* PROBLEM */}
       <SectionGlow>
         <h2 className="text-3xl font-semibold text-center text-gray-900 dark:text-gray-50">
           Gift-giving shouldn’t feel like a guessing game
         </h2>
-        <p className="text-gray-700 dark:text-gray-300 text-lg text-center mt-4">
-          We’ve all been there — awkward smiles, unused gifts, and the feeling of
-          “they tried… but they didn’t really get me.”
+        <p className="text-gray-700 dark:text-gray-300 text-lg text-center mt-4 max-w-3xl mx-auto">
+          We’ve all been there — awkward smiles, unused gifts, and that quiet
+          feeling of “they tried… but they didn’t really get me.”
         </p>
         <p className="text-gray-700 dark:text-gray-300 text-lg text-center mt-2">
           It’s not a lack of love — it’s a lack of clarity.
@@ -194,12 +136,15 @@ export default function HomePage() {
             className="object-cover"
           />
         </div>
+
         <h2 className="text-3xl font-semibold text-center text-gray-900 dark:text-gray-50">
-          We turn your personality into a gifting guide
+          We turn personality into a gifting blueprint
         </h2>
+
         <p className="text-gray-700 dark:text-gray-300 text-lg max-w-3xl mx-auto text-center mt-4">
-          Gift Me Right transforms your preferences, personality, and love language
-          into a beautifully designed <strong>“All About Me” journal</strong>.
+          Through guided journals, structured prompts, and emotional clarity,
+          we create something rare:
+          <strong> a gift guide that actually feels personal.</strong>
         </p>
       </SectionGlow>
 
@@ -219,7 +164,7 @@ export default function HomePage() {
             {
               img: "/images/design-it.jpg",
               title: "We design it",
-              desc: "Your answers become a polished, elegant journal.",
+              desc: "Your answers become a polished, elegant blueprint.",
             },
             {
               img: "/images/gift-better.jpg",
@@ -240,47 +185,39 @@ export default function HomePage() {
         </div>
       </SectionGlow>
 
-      {/* TESTIMONIALS */}
+      {/* OTHER PRODUCTS */}
       <SectionGlow>
         <h2 className="text-3xl font-semibold text-center text-gray-900 dark:text-gray-50">
-          What people are saying
+          Explore More Ways to Connect
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8 mt-8">
-          {[
-            {
-              img: "/images/testimonial1.jpg",
-              name: "Emily",
-              quote: "Birthdays are no longer awkward. Everyone finally gets me.",
-            },
-            {
-              img: "/images/testimonial2.jpg",
-              name: "Sarah",
-              quote:
-                "This completely changed how my partner shows love. I’ve never felt more understood.",
-            },
-            {
-              img: "/images/testimonial3.jpg",
-              name: "Alex",
-              quote:
-                "I made one for myself and one for my best friend. It’s thoughtful, fun, and emotional.",
-            },
-          ].map((item, idx) => (
-            <div
-              key={idx}
-              className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm transition transform hover:scale-105"
-            >
-              <div className="relative w-20 h-20 mx-auto rounded-full overflow-hidden mb-4">
-                <Image src={item.img} alt={item.name} fill className="object-cover" />
-              </div>
-              <p className="text-gray-700 dark:text-gray-300 text-center">
-                “{item.quote}”
-              </p>
-              <p className="mt-4 font-semibold text-center text-gray-900 dark:text-gray-50">
-                — {item.name}
-              </p>
-            </div>
-          ))}
+        <div className="grid md:grid-cols-3 gap-10 text-center mt-8">
+          <div>
+            <h3 className="text-xl font-semibold text-pink-600 mb-2">
+              Reflection Journals
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300">
+              Private, guided journals designed for deeper emotional clarity.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-semibold text-pink-600 mb-2">
+              Connection Games
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300">
+              Thoughtful prompts that bring people closer naturally.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-semibold text-pink-600 mb-2">
+              Emotional Slideshows & Coupons
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300">
+              A simple way to say what’s hard to put into words.
+            </p>
+          </div>
         </div>
       </SectionGlow>
 
@@ -305,10 +242,10 @@ export default function HomePage() {
 
         <div className="flex justify-center mt-6">
           <a
-            href="/create"
+            href="/shop"
             className="inline-block bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 hover:shadow-lg"
           >
-            Get Started
+            Get My Gift Blueprint
           </a>
         </div>
       </SectionGlow>
