@@ -116,6 +116,7 @@ export default function HomePage() {
         <h2 className="text-3xl font-semibold text-center">
           Some things are hard to say out loud.
         </h2>
+        <Image src="/images/people-gifting.jpg" alt="Happy people exchanging gifts" fill className="object-cover" />
 
         <p className="text-center mt-6 text-lg max-w-3xl mx-auto text-gray-700 dark:text-gray-300">
           The way you want to be loved.  
